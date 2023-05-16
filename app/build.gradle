@@ -7,7 +7,9 @@ plugins {
 android {
     namespace 'com.example.kuroupproject'
     compileSdk 33
-
+    buildFeatures{
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.example.kuroupproject"
         minSdk 24
@@ -34,7 +36,9 @@ android {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
