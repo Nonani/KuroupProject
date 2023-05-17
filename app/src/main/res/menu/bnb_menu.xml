@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bnb_kuroup_now"
+        android:icon="@drawable/common_google_signin_btn_icon_light"
+        android:title="현황" />
+    <item
+        android:id="@+id/bnb_home"
+        android:icon="@drawable/common_google_signin_btn_icon_light"
+        android:title="홈" />
+    <item
+        android:id="@+id/bnb_mypage"
+        android:icon="@drawable/common_google_signin_btn_icon_light"
+        android:title="My Page" />
+</menu>
