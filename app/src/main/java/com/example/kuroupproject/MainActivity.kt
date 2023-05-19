@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initLayout() {
         binding.apply {
-            button.setOnClickListener {
+            registerButton.setOnClickListener {
                 val db = FirebaseFirestore.getInstance()
                 val user = hashMapOf(
                     "id" to id.text.toString(),
