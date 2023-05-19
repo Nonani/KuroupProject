@@ -1,4 +1,4 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="20dp" /> <!-- 원하는 둥근 정도를 radius 값으로 조절합니다 -->
+    <corners android:radius="10dp" /> <!-- 원하는 둥근 정도를 radius 값으로 조절합니다 -->
     <solid android:color="#000000" /> <!-- 버튼의 배경 색상을 지정합니다 -->
 </shape>
