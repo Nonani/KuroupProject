@@ -1,6 +1,7 @@
 package com.example.kuroupproject
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kuroupproject.databinding.RowBookmarkBinding
@@ -8,6 +9,12 @@ import com.example.kuroupproject.databinding.RowContestBinding
 
 class ContestAdapter (val items: ArrayList<ContestData>) :
     RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
+
+    interface OnItemClickListener{
+        fun OnItemClick(holder: ContestAdapter.ViewHolder, view: View, data: ContestData, position: Int)
+    }
+
+    var itemClickListener: OnItemClickListener?= null
 
     inner class ViewHolder(val viewBinding: RowContestBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
@@ -34,7 +41,7 @@ class ContestAdapter (val items: ArrayList<ContestData>) :
             }
 
             viewBinding.root.setOnClickListener {
-                //상세 구현해야댐
+                itemClickListener?.OnItemClick(this, it, items[position], position)
             }
         }
 

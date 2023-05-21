@@ -1,5 +1,6 @@
 package com.example.kuroupproject
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,6 +38,18 @@ class HomeFragment : Fragment() {
         viewBinding.contestList.layoutManager=
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         contests_adapter= ContestAdapter(contests)
+        contests_adapter.itemClickListener = object : ContestAdapter.OnItemClickListener{
+            override fun OnItemClick(
+                holder: ContestAdapter.ViewHolder,
+                view: View,
+                data: ContestData,
+                position: Int
+            ) {
+                val intent = Intent(activity, DetailActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
         viewBinding.contestList.adapter=contests_adapter
 
     }
