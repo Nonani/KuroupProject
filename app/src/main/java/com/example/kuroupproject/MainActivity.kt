@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-        startActivity(Intent(this@MainActivity,HomeActivity::class.java))
+        startActivity(Intent(this@MainActivity,SignUpActivity::class.java))
     }
 
     public override fun onStart() {

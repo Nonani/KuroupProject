@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerLocation">
+        <item>C언어</item>
+        <item>JAVA</item>
+        <item>C++</item>
+        <item>Kotlin</item>
+        <item>Python</item>
+    </string-array>
+</resources>
