@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -14,13 +15,41 @@ private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment() {
     private lateinit var viewBinding : FragmentHomeBinding
+    var contests:ArrayList<ContestData> = ArrayList()
+    lateinit var contests_adapter: ContestAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater)
+
+        init()
+
         return viewBinding.root
     }
 
+    private fun init(){
+        //데이터 인입
+        init_data()
+
+        //리사이클러뷰 어뎁터 생성
+        viewBinding.contestList.layoutManager=
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
+        contests_adapter= ContestAdapter(contests)
+        viewBinding.contestList.adapter=contests_adapter
+
+    }
+
+    private fun init_data(){
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+        contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
+
+    }
 }

@@ -1,0 +1,61 @@
+package com.example.kuroupproject
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.kuroupproject.databinding.RowBookmarkBinding
+import com.example.kuroupproject.databinding.RowContestBinding
+
+class ContestAdapter (val items: ArrayList<ContestData>) :
+    RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
+
+    inner class ViewHolder(val viewBinding: RowContestBinding) :
+        RecyclerView.ViewHolder(viewBinding.root) {
+
+        fun bind(data: ContestData, position: Int) {
+            viewBinding.contestTitle.text = data.title
+            viewBinding.contestSupport.text=data.support
+            viewBinding.dday.text="D-"+data.date.toString()
+
+            if (data.star)
+                viewBinding.imageStar.setImageResource(R.drawable.bookmark_selected)
+            else
+                viewBinding.imageStar.setImageResource(R.drawable.bookmark_unselected)
+
+
+            viewBinding.imageStar.setOnClickListener {
+                //즐겨찾기
+                data.star = !data.star
+                if (data.star)
+                    viewBinding.imageStar.setImageResource(R.drawable.bookmark_selected)
+                else
+                    viewBinding.imageStar.setImageResource(R.drawable.bookmark_unselected)
+                notifyItemChanged(adapterPosition)
+            }
+
+            viewBinding.root.setOnClickListener {
+                //상세 구현해야댐
+            }
+        }
+
+    }
+
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = RowContestBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false
+        )
+
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(items[position], position)
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+}

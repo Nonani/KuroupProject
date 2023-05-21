@@ -10,4 +10,9 @@
         android:layout_height="match_parent"
         android:text="Home Fragment" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contest_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </FrameLayout>
