@@ -16,7 +16,13 @@ class StatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentStatusBinding.inflate(layoutInflater)
+
+        init()
         return viewBinding.root
+    }
+
+    private fun init() {
+
     }
 
 }
