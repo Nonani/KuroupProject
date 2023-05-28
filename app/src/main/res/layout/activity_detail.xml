@@ -15,6 +15,7 @@
         android:background="?attr/colorPrimary">
 
         <ImageView
+            android:id="@+id/back_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back_image" />

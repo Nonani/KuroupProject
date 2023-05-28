@@ -1,5 +1,6 @@
 package com.example.kuroupproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -13,6 +14,7 @@ class CreateTeamActivity : AppCompatActivity() {
         viewBinding = ActivityCreateTeamBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         initSpinner()
+        initActivity()
     }
 
     private fun initSpinner() {
@@ -24,5 +26,12 @@ class CreateTeamActivity : AppCompatActivity() {
 
         viewBinding.spinnerLocation.adapter=adapter1
         viewBinding.spinnerNumber.adapter=adapter2
+    }
+
+    private fun initActivity(){
+        viewBinding.backCreate.setOnClickListener{
+            val intent = Intent(this, CheckTeamActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

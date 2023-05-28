@@ -24,9 +24,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater)
-
         init()
-
         return viewBinding.root
     }
 
@@ -64,5 +62,5 @@ class HomeFragment : Fragment() {
         contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
         contests.add(ContestData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3, false))
 
-    }
+    }//등록 임박순, 조회순 정렬 구현해야됨
 }

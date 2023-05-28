@@ -32,11 +32,12 @@ class CheckTeamActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewBinding.back.setOnClickListener {
+        viewBinding.backCheck.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
             startActivity(intent)
         }
     }
+    // 지원하기 눌렀을때 Activity 구현해야됨
 
     private fun init_data() {
         teams.add(TeamCheckData("같이 열심히 해볼 분 구해요~", "서울", 3, 5))
