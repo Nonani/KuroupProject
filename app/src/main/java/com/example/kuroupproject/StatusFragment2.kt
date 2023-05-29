@@ -17,7 +17,12 @@ class StatusFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentStatusBinding.inflate(layoutInflater)
+        init()
         return viewBinding.root
+    }
+
+    private fun init() {
+        TODO("Not yet implemented")
     }
 
 }
