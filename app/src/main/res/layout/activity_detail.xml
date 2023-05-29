@@ -8,84 +8,49 @@
     android:orientation="vertical">
 
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/back_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/back" />
+            android:src="@drawable/back_image" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/logoImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/logo_icon" />
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:src="@drawable/logo_icon" />
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         app:srcCompat="@drawable/contest_img" />
 
-    <TextView
-        android:id="@+id/apply"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"/>
+
+    <Button
+        android:id="@+id/create_team_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="응모 대상" />
-
-    <TextView
-        android:id="@+id/apply1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/support"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="주최 후원" />
-
-    <TextView
-        android:id="@+id/support1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/period"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="접수 기간" />
-
-    <TextView
-        android:id="@+id/period1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/reward"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="총 상금" />
-
-    <TextView
-        android:id="@+id/reward1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/homepage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="홈페이지" />
-
-    <TextView
-        android:id="@+id/homepage1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:background="@drawable/login_button"
+        android:text="모집중인 팀 보러가기"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </LinearLayout>
