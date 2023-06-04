@@ -7,12 +7,13 @@ plugins {
 android {
     namespace 'com.example.kuroupproject'
     compileSdk 33
-    buildFeatures{
-        viewBinding true
-    }
+
     defaultConfig {
         applicationId "com.example.kuroupproject"
         minSdk 24
+        buildFeatures{
+            viewBinding true
+        }
         targetSdk 33
         versionCode 1
         versionName "1.0"

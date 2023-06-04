@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StatusFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,180 +82,12 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="239dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/mypage_myinfo_box">
-
-                    <TextView
-                        android:id="@+id/my_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="홍길동"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/my_name_request"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:text="님을 팀원으로 수락하시겠어요?"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        app:layout_constraintStart_toEndOf="@id/my_name"
-                        app:layout_constraintTop_toTopOf="@id/my_name" />
-
-                    <TextView
-                        android:id="@+id/my_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="성별"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/my_name" />
-
-                    <TextView
-                        android:id="@+id/my_gender_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="59dp"
-                        android:text="남자"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/my_gender"
-                        app:layout_constraintTop_toTopOf="@id/my_gender" />
-
-                    <TextView
-                        android:id="@+id/my_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="주 활동 지역"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/my_gender" />
-
-                    <TextView
-                        android:id="@+id/my_location_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="서울"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/my_location"
-                        app:layout_constraintTop_toTopOf="@id/my_location" />
-
-                    <TextView
-                        android:id="@+id/my_prog_lang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="사용 가능 언어"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/my_location" />
-
-                    <TextView
-                        android:id="@+id/my_progLang_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="C언어"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/my_prog_lang"
-                        app:layout_constraintTop_toTopOf="@id/my_prog_lang" />
-
-                    <TextView
-                        android:id="@+id/my_part"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="주력 파트"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/my_prog_lang" />
-
-                    <TextView
-                        android:id="@+id/my_part_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp"
-                        android:text="앱 프론트(안드로이드)"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/my_part"
-                        app:layout_constraintTop_toTopOf="@id/my_part" />
-
-                    <TextView
-                        android:id="@+id/my_oneline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="한줄 소개"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/my_part" />
-
-                    <TextView
-                        android:id="@+id/my_oneline_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp"
-                        android:text="저는 이미 프로젝트 경험이 있어서 잘할 수 있습니다!"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/my_oneline"
-                        app:layout_constraintTop_toTopOf="@id/my_oneline" />
-
-
-                    <RadioButton
-                        android:id="@+id/accept_button"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/accept_button"
-                        android:button="@null"
-                        android:text="수락"
-                        android:textAlignment="center"
-                        tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteX="20dp"
-                        tools:layout_editor_absoluteY="197dp" />
-
-                    <RadioButton
-                        android:id="@+id/recruit_button"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/recruit_button"
-                        android:button="@null"
-                        android:text="거절"
-                        android:textAlignment="center"
-                        tools:ignore="MissingConstraints"
-                        tools:layout_editor_absoluteX="200dp"
-                        tools:layout_editor_absoluteY="197dp" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/contest_list2"
+                    android:layout_width="367dp"
+                    android:layout_height="151dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="45dp"></androidx.recyclerview.widget.RecyclerView>
 
                 <View
                     android:id="@+id/empty_view"
@@ -284,177 +120,12 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="252dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/mypage_myinfo_box">
-
-                    <TextView
-                        android:id="@+id/rec_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:text="홍길동"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                    <TextView
-                        android:id="@+id/my_name_request2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:text="님"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        app:layout_constraintStart_toEndOf="@id/rec_name"
-                        app:layout_constraintTop_toTopOf="@id/rec_name" />
-
-                    <TextView
-                        android:id="@+id/apply_gender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="성별"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/rec_name" />
-
-                    <TextView
-                        android:id="@+id/apply_gender_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="59dp"
-                        android:text="남자"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_gender"
-                        app:layout_constraintTop_toTopOf="@id/apply_gender" />
-
-                    <TextView
-                        android:id="@+id/apply_location"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="주 활동 지역"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/apply_gender" />
-
-                    <TextView
-                        android:id="@+id/apply_location_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:text="서울"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_location"
-                        app:layout_constraintTop_toTopOf="@id/apply_location" />
-
-                    <TextView
-                        android:id="@+id/apply_prog_lang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="사용 가능 언어"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/apply_location" />
-
-                    <TextView
-                        android:id="@+id/apply_progLang_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="C언어"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_prog_lang"
-                        app:layout_constraintTop_toTopOf="@id/apply_prog_lang" />
-
-                    <TextView
-                        android:id="@+id/apply_part"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="주력 파트"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/apply_prog_lang" />
-
-                    <TextView
-                        android:id="@+id/apply_part_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp"
-                        android:text="앱 프론트(안드로이드)"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_part"
-                        app:layout_constraintTop_toTopOf="@id/apply_part" />
-
-                    <TextView
-                        android:id="@+id/apply_phone_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="연락처"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/apply_part" />
-
-                    <TextView
-                        android:id="@+id/apply_phoneNum_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="48dp"
-                        android:text="010-1234-5678"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_phone_num"
-                        app:layout_constraintTop_toTopOf="@id/apply_phone_num" />
-
-                    <TextView
-                        android:id="@+id/apply_oneline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="6dp"
-                        android:text="한줄 소개"
-                        android:textColor="@color/mypage_semibrown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/apply_phone_num" />
-
-                    <TextView
-                        android:id="@+id/apply_oneline_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="35dp"
-                        android:text="저는 이미 프로젝트 경험이 있어서 잘할 수 있습니다!"
-                        android:textColor="@color/mypage_brown"
-                        android:textSize="12dp"
-                        app:layout_constraintStart_toEndOf="@id/apply_oneline"
-                        app:layout_constraintTop_toTopOf="@id/apply_oneline" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/contest_list3"
+                    android:layout_width="367dp"
+                    android:layout_height="151dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="45dp"></androidx.recyclerview.widget.RecyclerView>
 
                 <View
                     android:id="@+id/empty_view2"
@@ -468,4 +139,5 @@
         </FrameLayout>
 
     </LinearLayout>
+    </ScrollView>
 </FrameLayout>
