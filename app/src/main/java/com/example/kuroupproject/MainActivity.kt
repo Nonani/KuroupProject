@@ -34,15 +34,13 @@ class MainActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email, pwd)
                     .addOnCompleteListener{ result ->
                         if (result.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-
                             val user = auth.currentUser
                             val db = FirebaseFirestore.getInstance()
                             val userData = hashMapOf(
                                 "id" to email,
                                 "pwd" to pwd,
                             )
-                        // Add a new document with a generated ID
+                        // Add a new document name by uid
                             db.collection("users").document(user!!.uid)
                                 .set(userData)
                                 .addOnSuccessListener { documentReference ->
