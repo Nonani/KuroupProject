@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteX="0dp"
+    android:background="@drawable/mypage_myinfo_box"
+    tools:layout_editor_absoluteY="-1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MyPageFragment">
+        <TextView
+            android:id="@+id/my_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="홍길동"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/my_name_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="님을 팀원으로 수락하시겠어요?"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@id/my_gender"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/my_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="성별"
+            android:textColor="@color/mypage_semibrown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_name" />
+
+        <TextView
+            android:id="@+id/my_gender_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="59dp"
+            android:text="남자"
+            android:textColor="@color/mypage_brown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@id/my_gender"
+            app:layout_constraintTop_toTopOf="@id/my_gender" />
+
+        <TextView
+            android:id="@+id/my_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:text="주 활동 지역"
+            android:textColor="@color/mypage_semibrown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_gender" />
+
+        <TextView
+            android:id="@+id/my_location_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="서울"
+            android:textColor="@color/mypage_brown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@id/my_location"
+            app:layout_constraintTop_toTopOf="@id/my_location" />
+
+        <TextView
+            android:id="@+id/my_prog_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:text="사용 가능 언어"
+            android:textColor="@color/mypage_semibrown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_location" />
+
+        <TextView
+            android:id="@+id/my_progLang_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="C언어"
+            android:textColor="@color/mypage_brown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@id/my_prog_lang"
+            app:layout_constraintTop_toTopOf="@id/my_prog_lang" />
+
+        <TextView
+            android:id="@+id/my_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:text="주력 파트"
+            android:textColor="@color/mypage_semibrown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_prog_lang" />
+
+        <TextView
+            android:id="@+id/my_part_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:text="앱 프론트(안드로이드)"
+            android:textColor="@color/mypage_brown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@id/my_part"
+            app:layout_constraintTop_toTopOf="@id/my_part" />
+
+        <TextView
+            android:id="@+id/my_oneline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="6dp"
+            android:text="한줄 소개"
+            android:textColor="@color/mypage_semibrown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_part" />
+
+        <TextView
+            android:id="@+id/my_oneline_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:text="저는 이미 프로젝트 경험이 있어서 잘할 수 있습니다!"
+            android:textColor="@color/mypage_brown"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@id/my_oneline"
+            app:layout_constraintTop_toTopOf="@id/my_oneline" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/empty_view"
+        tools:ignore="MissingConstraints">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="수락"
+            android:textAlignment="center"
+            android:layout_marginRight="20dp"
+            android:button="@null"
+            android:background="@drawable/accept_button"
+           />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="거절"
+            android:textAlignment="center"
+            android:button="@null"
+            android:background="@drawable/accept_button"
+            />
+    </RadioGroup>
+        <View
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/my_oneline_info" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

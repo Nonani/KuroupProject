@@ -83,11 +83,13 @@
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contest_list2"
+                    android:id="@+id/contest_list"
                     android:layout_width="367dp"
                     android:layout_height="151dp"
                     tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="45dp"></androidx.recyclerview.widget.RecyclerView>
+                    tools:layout_editor_absoluteY="45dp"
+                    tools:ignore="MissingConstraints"
+            ></androidx.recyclerview.widget.RecyclerView>
 
                 <View
                     android:id="@+id/empty_view"
