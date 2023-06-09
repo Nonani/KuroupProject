@@ -82,14 +82,21 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contest_list"
-                    android:layout_width="367dp"
-                    android:layout_height="151dp"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="45dp"
-                    tools:ignore="MissingConstraints"
-            ></androidx.recyclerview.widget.RecyclerView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="239dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/contest_list2"
+                        android:layout_width="367dp"
+                        android:layout_height="151dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="45dp"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:id="@+id/empty_view"
@@ -122,12 +129,22 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contest_list3"
-                    android:layout_width="367dp"
-                    android:layout_height="151dp"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="45dp"></androidx.recyclerview.widget.RecyclerView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="239dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    >
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/contest_list"
+                        android:layout_width="367dp"
+                        android:layout_height="151dp"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:layout_editor_absoluteY="45dp"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:id="@+id/empty_view2"
