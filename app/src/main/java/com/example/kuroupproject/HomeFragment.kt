@@ -50,10 +50,10 @@ class HomeFragment : Fragment() {
             }
 
         }
-//        viewBinding.boomOrder.setOnClickListener {
-//            contests.sortedBy { it.date }
-//            viewBinding.contestList.adapter?.notifyDataSetChanged()
-//        }
+        viewBinding.boomOrder.setOnClickListener {
+            contests.sortBy { it.date }
+            viewBinding.contestList.adapter?.notifyDataSetChanged()
+        }
         viewBinding.contestList.adapter = contests_adapter
 
     }
@@ -67,6 +67,5 @@ class HomeFragment : Fragment() {
         contests.add(ContestData("2023 버블탭 아이디어 공모전", "고용노동부,한국산업인력공단", 3, false))
         contests.add(ContestData("2023 버블탭 아이디어 공모전", "고용노동부,한국산업인력공단", 2, false))
         contests.add(ContestData("2023 버블탭 아이디어 공모전", "고용노동부,한국산업인력공단", 10, false))
-        contests.sortedBy { it.date }
-    }//등록 임박순, 조회순 정렬 구현해야됨
+    }
 }
