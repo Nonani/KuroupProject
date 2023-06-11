@@ -31,6 +31,7 @@ class CreateTeamActivity : AppCompatActivity() {
     private fun initActivity(){
         viewBinding.backCreate.setOnClickListener{
             val intent = Intent(this, CheckTeamActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
     }

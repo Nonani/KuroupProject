@@ -19,11 +19,13 @@ class DetailActivity : AppCompatActivity() {
     private fun init() {
         viewBinding.createTeamButton.setOnClickListener {
             val intent = Intent(this, CheckTeamActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
 
         viewBinding.backDetail.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
     }
