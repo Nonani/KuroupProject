@@ -1,10 +1,17 @@
 package com.example.kuroupproject.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kuroupproject.datas.BookmarkData
 import com.example.kuroupproject.databinding.RowBookmarkBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
     RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
@@ -13,6 +20,10 @@ class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
         fun OnItemClick(data: BookmarkData)
     }
     var itemClickListener : OnItemClickListener?=null
+    lateinit var userId: String
+    lateinit var currentUser: FirebaseUser
+    lateinit var auth: FirebaseAuth
+    lateinit var firestore: FirebaseFirestore
 
     inner class ViewHolder(val viewBinding: RowBookmarkBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
@@ -20,10 +31,28 @@ class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
         fun bind(data: BookmarkData, position: Int) {
             viewBinding.bookmarkTitle.text = data.title
             viewBinding.bookmarkSupport.text=data.support
-            viewBinding.btDday.text="D-"+data.dday.toString()
+            viewBinding.btDday.text=data.d_day
 
             viewBinding.imageStar.setOnClickListener {
                 itemClickListener?.OnItemClick(items[adapterPosition])
+
+                auth = FirebaseAuth.getInstance()
+                currentUser = auth.currentUser!!
+                userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
+                firestore = FirebaseFirestore.getInstance()
+
+                val scrapData = hashMapOf(
+                    "d_day" to data.d_day,
+                    "support" to data.support,
+                    "title" to data.title
+                )
+                firestore.collection("users").document(userId).update("scrap", FieldValue.arrayRemove(scrapData))
+                    .addOnSuccessListener {
+                        Log.d("Scrap", "Scrap deleted successfully")
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.w("Scrap", "Error deleting scrap", exception)
+                    }
                 //해당 row 삭제
                 items.removeAt(position)
                 notifyItemChanged(adapterPosition)
