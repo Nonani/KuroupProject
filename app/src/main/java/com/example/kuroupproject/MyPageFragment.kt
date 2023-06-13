@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.databinding.FragmentHomeBinding
 import com.example.kuroupproject.databinding.FragmentMyPageBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.log
 
@@ -20,19 +21,21 @@ class MyPageFragment : Fragment() {
     lateinit var adapter: BookmarkAdapter
     lateinit var firestore: FirebaseFirestore
     lateinit var userId : String
+    lateinit var auth : FirebaseAuth
+    lateinit var currentUser : FirebaseUser
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentMyPageBinding.inflate(layoutInflater)
-        initRecyclerView()
         initMyData()
+        initRecyclerView()
         return viewBinding.root
     }
 
     private fun initMyData() {
-        val auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
+        auth = FirebaseAuth.getInstance()
+        currentUser = auth.currentUser!!
         userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
         firestore = FirebaseFirestore.getInstance()
         firestore.collection("users").document(userId!!)
@@ -64,32 +67,68 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        //데이터 초기화
-        bookmarks.add(BookmarkData("2023 버블탭 아이디어 공모전","고용노동부,한국산업인력공단",3))
-
-        viewBinding.recyclerviewBookmark.layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
-        adapter= BookmarkAdapter(bookmarks)
-        viewBinding.recyclerviewBookmark.adapter=adapter
-
         //찜추가 정보 들어오면 데이터 추가 작업
-//        userId = "사용자의 고유 식별자"
-//        firestore.collection("users").document(userId)
-//            .get()
-//            .addOnSuccessListener { documentSnapshot ->
-//                val user = documentSnapshot.data
-//                user?.let {
-//                    // 다른 필드들 가져오는 코드 생략
-//                    val favorites = user["favorites"] as? ArrayList<String>
-//                    for(favorite in favorites!!){
-//                        bookmarks.add(BookmarkData("2023 버블탭 아이디어 공모전",
-//                            "고용노동부,한국산업인력공단",
-//                            3))
-//                    }
-//                }
-//            }
-//            .addOnFailureListener { e ->
-//                // 사용자 데이터를 불러오는 중에 오류가 발생했습니다.
-//            }
+        firestore.collection("users").document(userId)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                val user = documentSnapshot.data
+                user?.let {
+                    val scrapDataList = user["scrap"] as? ArrayList<HashMap<String,String>>
+                    if(scrapDataList!=null&&scrapDataList.isNotEmpty()){
+                        for (scrapData in scrapDataList) {
+                            val title = scrapData["title"] ?: ""
+                            val dDay = scrapData["d_day"] ?: ""
+                            val support = scrapData["support"] ?: ""
+
+                            val bookmarkData = BookmarkData(title, support, dDay.toInt())
+
+                            bookmarks.add(bookmarkData)
+                        }
+                    }
+                }
+                // 데이터를 추가한 후 RecyclerView 어댑터 설정 및 업데이트
+                viewBinding.recyclerviewBookmark.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = BookmarkAdapter(bookmarks)
+
+                adapter.itemClickListener=object:BookmarkAdapter.OnItemClickListener{
+                    override fun OnItemClick(data: BookmarkData) {
+                        firestore.collection("users").document(userId)
+                            .get()
+                            .addOnSuccessListener { documentSnapshot ->
+                                val user = documentSnapshot.data
+                                user?.let {
+                                    val scrapDataList = user["scrap"] as? ArrayList<HashMap<String, String>>
+                                    if (scrapDataList != null) {
+                                        // 해당 아이템 데이터를 삭제
+                                        scrapDataList.removeIf { scrapData ->
+                                            scrapData["title"] == data.title &&
+                                                    scrapData["d_day"] == data.dday.toString() &&
+                                                    scrapData["support"] == data.support
+                                        }
+
+                                        // 수정된 데이터를 Firestore에 업데이트
+                                        firestore.collection("users").document(userId)
+                                            .update("scrap", scrapDataList)
+                                            .addOnSuccessListener {
+                                                // 데이터 업데이트 성공
+                                            }
+                                            .addOnFailureListener { e ->
+                                                // 데이터 업데이트 실패
+                                            }
+                                    }
+                                }
+                            }
+                            .addOnFailureListener { e ->
+                                // 사용자 데이터를 불러오는 중에 오류가 발생했습니다.
+                                // TODO: 오류 처리
+                            }
+                    }
+                }
+                viewBinding.recyclerviewBookmark.adapter = adapter
+            }
+            .addOnFailureListener { e ->
+                // 사용자 데이터를 불러오는 중에 오류가 발생했습니다.
+            }
     }
 
 }
