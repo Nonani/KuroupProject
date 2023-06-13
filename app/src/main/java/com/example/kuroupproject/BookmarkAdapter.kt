@@ -8,6 +8,11 @@ import com.example.kuroupproject.databinding.RowBookmarkBinding
 class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
     RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
+    interface OnItemClickListener{
+        fun OnItemClick(data:BookmarkData)
+    }
+    var itemClickListener : OnItemClickListener?=null
+
     inner class ViewHolder(val viewBinding: RowBookmarkBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
@@ -17,6 +22,7 @@ class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
             viewBinding.btDday.text="D-"+data.dday.toString()
 
             viewBinding.imageStar.setOnClickListener {
+                itemClickListener?.OnItemClick(items[adapterPosition])
                 //해당 row 삭제
                 items.removeAt(position)
                 notifyItemChanged(adapterPosition)
