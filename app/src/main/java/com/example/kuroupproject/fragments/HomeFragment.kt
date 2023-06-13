@@ -1,7 +1,6 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.fragments
 
 import android.content.Intent
-import android.os.Build.VERSION_CODES.N
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kuroupproject.datas.ContestData
+import com.example.kuroupproject.activitys.DetailActivity
+import com.example.kuroupproject.adapters.ContestAdapter
 import com.example.kuroupproject.databinding.FragmentHomeBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.OkHttpClient

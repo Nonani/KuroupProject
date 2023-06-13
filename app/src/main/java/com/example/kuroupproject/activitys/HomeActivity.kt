@@ -1,7 +1,11 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.kuroupproject.fragments.HomeFragment
+import com.example.kuroupproject.fragments.MyPageFragment
+import com.example.kuroupproject.R
+import com.example.kuroupproject.fragments.StatusFragment
 import com.example.kuroupproject.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -19,10 +23,10 @@ class HomeActivity : AppCompatActivity() {
          * 가장 처음 지정될 아이콘 및 프레그먼트 설정
          */
 
-        viewBinding.btmNav.selectedItemId=R.id.bnb_home
+        viewBinding.btmNav.selectedItemId= R.id.bnb_home
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.main_frame,HomeFragment())
+            .replace(R.id.main_frame, HomeFragment())
             .commitAllowingStateLoss()
 
         /**
@@ -32,22 +36,22 @@ class HomeActivity : AppCompatActivity() {
         viewBinding.btmNav.run {
             setOnItemSelectedListener { item ->
                 when(item.itemId){
-                    R.id.bnb_kuroup_status->{
+                    R.id.bnb_kuroup_status ->{
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.main_frame,StatusFragment())
+                            .replace(R.id.main_frame, StatusFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.bnb_home->{
+                    R.id.bnb_home ->{
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.main_frame,HomeFragment())
+                            .replace(R.id.main_frame, HomeFragment())
                             .commitAllowingStateLoss()
                     }
-                    R.id.bnb_mypage->{
+                    R.id.bnb_mypage ->{
                         supportFragmentManager
                             .beginTransaction()
-                            .replace(R.id.main_frame,MyPageFragment())
+                            .replace(R.id.main_frame, MyPageFragment())
                             .commitAllowingStateLoss()
                     }
                 }

@@ -1,23 +1,22 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kuroupproject.datas.UserData
 import com.example.kuroupproject.databinding.RowUserBinding
 
-class ApplyUserDataAdapter(val items: ArrayList<UserData>) :
-RecyclerView.Adapter<ApplyUserDataAdapter.ViewHolder>() {
+class AcceptedUserDataAdapter(val items: ArrayList<UserData>) :
+RecyclerView.Adapter<AcceptedUserDataAdapter.ViewHolder>() {
     interface OnItemClickListener {
         fun OnItemClick(data: UserData)
     }
 
     var itemClickListener1: OnItemClickListener? = null
-    var itemClickListener2: OnItemClickListener? = null
 
     inner class ViewHolder(val binding: RowUserBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.acceptBtn.setOnClickListener { itemClickListener1?.OnItemClick(items[adapterPosition]) }
-            binding.rejectBtn.setOnClickListener { itemClickListener2?.OnItemClick(items[adapterPosition]) }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

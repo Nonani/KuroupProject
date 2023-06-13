@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.datas
 
 import android.media.Image
 

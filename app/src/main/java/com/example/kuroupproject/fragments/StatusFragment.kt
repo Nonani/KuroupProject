@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import com.example.kuroupproject.databinding.FragmentMyPageBinding
+import com.example.kuroupproject.R
 import com.example.kuroupproject.databinding.FragmentStatusBinding
 
 class StatusFragment : Fragment() {
@@ -29,7 +28,7 @@ class StatusFragment : Fragment() {
          */
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.frame_status,CreatedStatusFragment())
+            .replace(R.id.frame_status, CreatedStatusFragment())
             .commitAllowingStateLoss()
 
         /**
@@ -38,16 +37,16 @@ class StatusFragment : Fragment() {
 
         viewBinding.radioGroup.setOnCheckedChangeListener { group, id ->
             Log.d("test",id.toString())
-            if(id==R.id.radioButton){
+            if(id== R.id.radioButton){
                 requireActivity().supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frame_status,ApplyStatusFragment())
+                    .replace(R.id.frame_status, ApplyStatusFragment())
                     .commitAllowingStateLoss()
             }
             else{
                 requireActivity().supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.frame_status,CreatedStatusFragment())
+                    .replace(R.id.frame_status, CreatedStatusFragment())
                     .commitAllowingStateLoss()
             }
         }

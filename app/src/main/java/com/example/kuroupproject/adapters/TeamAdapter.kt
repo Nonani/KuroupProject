@@ -1,16 +1,11 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.adapters
 
-import android.app.Dialog
-import android.content.DialogInterface
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kuroupproject.databinding.RowBookmarkBinding
-import com.example.kuroupproject.databinding.RowContestBinding
+import com.example.kuroupproject.datas.TeamCheckData
 import com.example.kuroupproject.databinding.RowTeamBinding
 
 class TeamAdapter(val items: ArrayList<TeamCheckData>) :
@@ -19,7 +14,7 @@ class TeamAdapter(val items: ArrayList<TeamCheckData>) :
 
     interface OnItemClickListener {
         fun OnItemClick(
-            holder: TeamAdapter.ViewHolder,
+            holder: ViewHolder,
             view: View,
             data: TeamCheckData,
             position: Int

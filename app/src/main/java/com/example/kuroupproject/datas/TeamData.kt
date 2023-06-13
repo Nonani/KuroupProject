@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.datas
 
 data class TeamData(val detail_url:String,
                     val team_max_number:Int,

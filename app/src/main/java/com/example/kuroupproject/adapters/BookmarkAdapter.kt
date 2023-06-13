@@ -1,15 +1,16 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kuroupproject.datas.BookmarkData
 import com.example.kuroupproject.databinding.RowBookmarkBinding
 
 class BookmarkAdapter (val items: ArrayList<BookmarkData>) :
     RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     interface OnItemClickListener{
-        fun OnItemClick(data:BookmarkData)
+        fun OnItemClick(data: BookmarkData)
     }
     var itemClickListener : OnItemClickListener?=null
 

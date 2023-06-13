@@ -1,8 +1,9 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kuroupproject.datas.UserData
 import com.example.kuroupproject.databinding.RowUserBinding
 
 class TeamDataAdapter(val items: ArrayList<UserData>) :

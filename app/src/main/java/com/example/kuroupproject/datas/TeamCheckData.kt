@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.datas
 
 class TeamCheckData (
     var title: String,

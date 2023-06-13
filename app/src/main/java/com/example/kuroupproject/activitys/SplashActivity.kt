@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

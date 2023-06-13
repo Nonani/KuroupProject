@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kuroupproject.databinding.FragmentHomeBinding
+import com.example.kuroupproject.datas.BookmarkData
+import com.example.kuroupproject.adapters.BookmarkAdapter
 import com.example.kuroupproject.databinding.FragmentMyPageBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.math.log
 
 class MyPageFragment : Fragment() {
     private lateinit var viewBinding : FragmentMyPageBinding
@@ -90,7 +89,7 @@ class MyPageFragment : Fragment() {
                 viewBinding.recyclerviewBookmark.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 adapter = BookmarkAdapter(bookmarks)
 
-                adapter.itemClickListener=object:BookmarkAdapter.OnItemClickListener{
+                adapter.itemClickListener=object: BookmarkAdapter.OnItemClickListener{
                     override fun OnItemClick(data: BookmarkData) {
                         firestore.collection("users").document(userId)
                             .get()

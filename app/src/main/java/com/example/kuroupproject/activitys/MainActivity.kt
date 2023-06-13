@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.kuroupproject.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private fun initLayout() {
         binding.apply {
             registerButton.setOnClickListener {
-                startActivity(Intent(this@MainActivity,SignUpActivity::class.java))
+                startActivity(Intent(this@MainActivity, SignUpActivity::class.java))
             }
             loginButton.setOnClickListener {
                 val email = id.text.toString()

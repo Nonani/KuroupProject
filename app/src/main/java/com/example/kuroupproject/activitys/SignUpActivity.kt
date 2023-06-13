@@ -1,11 +1,11 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.kuroupproject.R
 import com.example.kuroupproject.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -90,7 +90,7 @@ class SignUpActivity : AppCompatActivity() {
                                     .document(uid!!).set(userData)
                                     .addOnSuccessListener { documentReference ->
                                         // 사용자 데이터가 성공적으로 추가되었습니다.
-                                        val intent = Intent(this@SignUpActivity,MainActivity::class.java)
+                                        val intent = Intent(this@SignUpActivity, MainActivity::class.java)
                                         intent.putExtra("email",id)
                                         intent.putExtra("password",pwd)
                                         startActivity(intent)

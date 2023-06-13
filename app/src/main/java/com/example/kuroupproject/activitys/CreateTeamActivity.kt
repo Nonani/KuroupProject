@@ -1,11 +1,11 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import com.example.kuroupproject.R
 import com.example.kuroupproject.databinding.ActivityCreateTeamBinding
-import com.example.kuroupproject.databinding.ActivityMainBinding
 
 class CreateTeamActivity : AppCompatActivity() {
     lateinit var viewBinding : ActivityCreateTeamBinding

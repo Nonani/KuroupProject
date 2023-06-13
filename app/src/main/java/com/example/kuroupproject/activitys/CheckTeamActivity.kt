@@ -1,13 +1,12 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.activitys
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kuroupproject.datas.TeamCheckData
+import com.example.kuroupproject.adapters.TeamAdapter
 import com.example.kuroupproject.databinding.ActivityCheckTeamBinding
-import com.example.kuroupproject.databinding.FragmentHomeBinding
 
 class CheckTeamActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityCheckTeamBinding

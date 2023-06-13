@@ -1,4 +1,4 @@
-package com.example.kuroupproject
+package com.example.kuroupproject.datas
 
 data class BookmarkData(
     var title: String,
