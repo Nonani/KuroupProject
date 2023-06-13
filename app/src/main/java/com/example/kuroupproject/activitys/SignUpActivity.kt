@@ -67,16 +67,6 @@ class SignUpActivity : AppCompatActivity() {
                     //내용 입력이 다 된 경우
                     val scrapDataList = arrayListOf<HashMap<String,String>>()
 
-                    val userData = hashMapOf(
-                        "name" to name,
-                        "phonenum" to phoneNum,
-                        "gender" to gender,
-                        "location" to location,
-                        "language" to language,
-                        "mainPart" to mainPart,
-                        "onelineExplain" to onelineExplain,
-                        "scrap" to scrapDataList
-                    )
                     val auth = FirebaseAuth.getInstance()
                     auth.createUserWithEmailAndPassword(id,pwd)
                         .addOnCompleteListener{task->
@@ -84,6 +74,18 @@ class SignUpActivity : AppCompatActivity() {
                                 //사용자 등록 성공
                                 val user: FirebaseUser?=auth.currentUser
                                 val uid:String?=user?.uid
+
+                                val userData = hashMapOf(
+                                    "uid" to uid,
+                                    "name" to name,
+                                    "phonenum" to phoneNum,
+                                    "gender" to gender,
+                                    "location" to location,
+                                    "language" to language,
+                                    "mainPart" to mainPart,
+                                    "onelineExplain" to onelineExplain,
+                                    "scrap" to scrapDataList
+                                )
 
                                 val firestore = FirebaseFirestore.getInstance()
                                 firestore.collection("users")
@@ -101,6 +103,7 @@ class SignUpActivity : AppCompatActivity() {
 
                             }
                         }
+
                 }
             }
         }
