@@ -5,18 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.kuroupproject.databinding.FragmentStatusApplyBinding
 import com.example.kuroupproject.databinding.FragmentStatusBinding
 
 
 class ApplyStatusFragment : Fragment() {
 
-    private lateinit var viewBinding : FragmentStatusBinding
+    private lateinit var viewBinding : FragmentStatusApplyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentStatusBinding.inflate(layoutInflater)
+        viewBinding = FragmentStatusApplyBinding.inflate(layoutInflater)
         init()
         return viewBinding.root
     }

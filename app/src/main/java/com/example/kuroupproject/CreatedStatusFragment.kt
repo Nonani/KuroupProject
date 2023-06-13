@@ -6,15 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kuroupproject.databinding.FragmentStatusBinding
+import com.example.kuroupproject.databinding.FragmentStatusCreatedBinding
 
 class CreatedStatusFragment : Fragment() {
-    private lateinit var viewBinding : FragmentStatusBinding
+    private lateinit var viewBinding : FragmentStatusCreatedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentStatusBinding.inflate(layoutInflater)
+        viewBinding = FragmentStatusCreatedBinding.inflate(layoutInflater)
 
         init()
         return viewBinding.root
