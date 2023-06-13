@@ -1,162 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreatedStatusFragment">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
-
-            <ImageView
-                android:id="@+id/logoImageView"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/logo_icon" />
-        </androidx.appcompat.widget.Toolbar>
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/radiogroup_box"
-            android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="지원 현황"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="내가 지원한 팀"
-                android:textAlignment="center"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contest_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1" />
 
-                android:button="@null"
-                android:background="@drawable/selector_radio_button"
-                android:textColor="@color/radiobutton_text_color_selector"/>
+        </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="내가 만든 팀"
-                android:textAlignment="center"
-                android:button="@null"
-                android:background="@drawable/selector_radio_button"
-                android:textColor="@color/radiobutton_text_color_selector"/>
-        </RadioGroup>
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="모집 현황"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-
-            <LinearLayout
-                android:id="@+id/applyInformation_linearlayout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contest_list2"
                 android:layout_width="match_parent"
-                android:layout_height="313dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="지원 현황"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="239dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    >
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/contest_list2"
-                        android:layout_width="367dp"
-                        android:layout_height="151dp"
-                        tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="45dp"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/empty_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:background="@android:color/transparent" />
-            </LinearLayout>
-
-
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/applyInformation_linearlayout2"
-                android:layout_width="match_parent"
-                android:layout_height="313dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:text="모집 현황"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="239dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="20dp"
-                    >
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/contest_list"
-                        android:layout_width="367dp"
-                        android:layout_height="151dp"
-                        tools:layout_editor_absoluteX="0dp"
-                        tools:layout_editor_absoluteY="45dp"
-                        tools:ignore="MissingConstraints" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <View
-                    android:id="@+id/empty_view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="27dp"
-                    android:background="@android:color/transparent" />
-            </LinearLayout>
-
-
-
-        </FrameLayout>
-
+                android:layout_height="0dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
-    </ScrollView>
 </FrameLayout>

@@ -75,8 +75,6 @@ class HomeFragment : Fragment() {
 
 
     private fun init_data() {
-
-
         val httpClient = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()

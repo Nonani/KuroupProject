@@ -8,54 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
-
-            <ImageView
-                android:id="@+id/logoImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/logo_icon" />
-        </androidx.appcompat.widget.Toolbar>
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/radiogroup_box"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="내가 지원한 팀"
-                android:textAlignment="center"
-                android:checked="true"
-                android:button="@null"
-                android:background="@drawable/selector_radio_button"
-                android:textColor="@color/radiobutton_text_color_selector"/>
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="내가 만든 팀"
-                android:textAlignment="center"
-                android:button="@null"
-                android:background="@drawable/selector_radio_button"
-                android:textColor="@color/radiobutton_text_color_selector"/>
-        </RadioGroup>
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,30 +23,22 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="239dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
-                >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contest_list"
-                    android:layout_width="367dp"
-                    android:layout_height="151dp"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="45dp"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1" />
 
+        </LinearLayout>
 
-        </FrameLayout>
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,25 +48,13 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="239dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
-                >
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contest_list2"
-                    android:layout_width="367dp"
-                    android:layout_height="151dp"
-                    tools:layout_editor_absoluteX="0dp"
-                    tools:layout_editor_absoluteY="45dp"
-                    tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </FrameLayout>
-
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>
