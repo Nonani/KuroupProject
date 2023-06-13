@@ -64,10 +64,10 @@ router.post('/created', async (req, res) => {
         const usersRef = database.collection('users');
 
         if (waiting_list.length != 0) {
-            for (const uid of waiting_list) {
-                const doc = await usersRef.doc(uid).get();
+            for (const _uid of waiting_list) {
+                const doc = await usersRef.doc(_uid).get();
                 if (doc.exists) {
-                    accepted_users.push(doc.data());
+                    waiting_users.push(doc.data());
                 } else {
                     console.log(`User with uid ${uid} does not exist.`);
                 }
@@ -75,8 +75,8 @@ router.post('/created', async (req, res) => {
         }
 
         if (accepted_list.length != 0) {
-            for (const uid of accepted_list) {
-                const doc = await usersRef.doc(uid).get();
+            for (const _uid of accepted_list) {
+                const doc = await usersRef.doc(_uid).get();
                 if (doc.exists) {
                     accepted_users.push(doc.data());
                 } else {
