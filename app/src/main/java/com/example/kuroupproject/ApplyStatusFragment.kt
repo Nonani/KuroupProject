@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.kuroupproject.databinding.FragmentStatusApplyBinding
-import com.example.kuroupproject.databinding.FragmentStatusBinding
+
 
 
 class ApplyStatusFragment : Fragment() {
