@@ -13,7 +13,6 @@ class DetailActivity : AppCompatActivity() {
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         init()
-        //리사이클러뷰 firebase로 구현(정보가 다 달라서 row.xml으로 하나씩 받아야될듯?)
     }
 
     private fun init() {

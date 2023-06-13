@@ -21,10 +21,12 @@ class ContestAdapter (val items: ArrayList<ContestData>) :
 
         fun bind(data: ContestData, position: Int) {
             viewBinding.contestTitle.text = data.title
-            viewBinding.contestSupport.text=data.support
-            viewBinding.dday.text="D-"+data.date.toString()
+            viewBinding.contestSupport.text=data.sub_title
+//            viewBinding.dday.text="D-"+data.date.toString()
+            viewBinding.dday.text=data.d_day
 
-            if (data.star)
+
+            if (data.clipped)
                 viewBinding.imageStar.setImageResource(R.drawable.bookmark_selected)
             else
                 viewBinding.imageStar.setImageResource(R.drawable.bookmark_unselected)
@@ -32,8 +34,8 @@ class ContestAdapter (val items: ArrayList<ContestData>) :
 
             viewBinding.imageStar.setOnClickListener {
                 //즐겨찾기
-                data.star = !data.star
-                if (data.star)
+                data.clipped = !data.clipped
+                if (data.clipped)
                     viewBinding.imageStar.setImageResource(R.drawable.bookmark_selected)
                 else
                     viewBinding.imageStar.setImageResource(R.drawable.bookmark_unselected)

@@ -27,7 +27,7 @@ router.post('/list', async (req, res) => {
         const titleItems = $('ul.list>li>div.tit>a');
         const subtitleItems = $('ul.list>li>div.tit>div.sub-tit');
         const dDayItems = $('div.day');
-        const readCntItems = $('div.read');
+        const readCntItems = $('div.read');//조회수
 
         for (let i = 0; i < titleItems.length; i++) {
             var dictObject = {}
