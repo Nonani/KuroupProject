@@ -64,16 +64,17 @@ class SignUpActivity : AppCompatActivity() {
                     onelineExplainEt.requestFocus()
                 } else {
                     //내용 입력이 다 된 경우
+                    val scrapDataList = arrayListOf<HashMap<String,String>>()
+
                     val userData = hashMapOf(
-                        "id" to id,
-                        "pwd" to pwd,
                         "name" to name,
                         "phonenum" to phoneNum,
                         "gender" to gender,
                         "location" to location,
                         "language" to language,
                         "mainPart" to mainPart,
-                        "onelineExplain" to onelineExplain
+                        "onelineExplain" to onelineExplain,
+                        "scrap" to scrapDataList
                     )
                     val auth = FirebaseAuth.getInstance()
                     auth.createUserWithEmailAndPassword(id,pwd)

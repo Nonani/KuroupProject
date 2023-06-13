@@ -25,13 +25,15 @@
 
     <TextView
         android:id="@+id/contest_support"
-        android:layout_width="wrap_content"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
         android:text="고용노동부,한국산업인력공단"
         android:textColor="@color/mypage_semibrown"
         android:textSize="12dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/contest_title" />
 
