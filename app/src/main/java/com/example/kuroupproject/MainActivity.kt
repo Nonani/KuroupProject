@@ -22,42 +22,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initLayout()
+
+        val intent = intent
+        val email: String? = intent.getStringExtra("email")
+        val password : String? = intent.getStringExtra("password")
+
+        binding.id.setText(email)
+        binding.pwd.setText(password)
     }
 
     private fun initLayout() {
         binding.apply {
             registerButton.setOnClickListener {
-                val email = id.text.toString()
-                val pwd = pwd.text.toString()
-
-
-                auth.createUserWithEmailAndPassword(email, pwd)
-                    .addOnCompleteListener{ result ->
-                        if (result.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-
-                            val user = auth.currentUser
-                            val db = FirebaseFirestore.getInstance()
-                            val userData = hashMapOf(
-                                "id" to email,
-                                "pwd" to pwd,
-                            )
-                        // Add a new document with a generated ID
-                            db.collection("users").document(user!!.uid)
-                                .set(userData)
-                                .addOnSuccessListener { documentReference ->
-                                    Toast.makeText(this@MainActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.w("Error", "Error adding document", e)
-                                }
-//                            updateUI(user)
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(this@MainActivity, result.exception.toString(), Toast.LENGTH_SHORT).show()
-//                            updateUI(null)
-                        }
-                    }
+                startActivity(Intent(this@MainActivity,SignUpActivity::class.java))
             }
             loginButton.setOnClickListener {
                 val email = id.text.toString()
@@ -70,15 +47,21 @@ class MainActivity : AppCompatActivity() {
                                 var intent = Intent(this@MainActivity, HomeActivity::class.java)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(this@MainActivity, result.exception.toString(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MainActivity, "로그인 정보를 다시 확인해주세요", Toast.LENGTH_SHORT).show()
                             }
                         }
+                }
+                else if(email.isEmpty()){
+                    Toast.makeText(this@MainActivity,"이메일을 입력해주세요",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    Toast.makeText(this@MainActivity,"비밀번호를 입력해주세요",Toast.LENGTH_SHORT).show()
                 }
 
             }
 
         }
-        startActivity(Intent(this@MainActivity,HomeActivity::class.java))
+        //startActivity(Intent(this@MainActivity,SignUpActivity::class.java))
     }
 
     public override fun onStart() {
