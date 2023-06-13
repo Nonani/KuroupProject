@@ -36,16 +36,25 @@ class HomeFragment : Fragment() {
 
     var contests: ArrayList<ContestData> = ArrayList()
     lateinit var contests_adapter: ContestAdapter
+    var isClickedBoom: Boolean = false
+    var isClickedLate: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater)
-        init_data()
         return viewBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!::contests_adapter.isInitialized) {
+            init_data()
+        } else {
+            setupRecyclerView(contests)
+        }
+    }
 
 
 
@@ -60,14 +69,35 @@ class HomeFragment : Fragment() {
                 data: ContestData,
                 position: Int
             ) {
-                val intent = Intent(activity, DetailActivity::class.java)
+                val intent = Intent(activity, DetailActivity::class.java).apply {
+                    putExtra(
+                        "contestData",
+                        data
+                    )
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
             }
 
         }
         viewBinding.boomOrder.setOnClickListener {
-//            contests.sortBy { it.date }
+            isClickedBoom = !isClickedBoom
+            if (isClickedBoom)
+                contests.sortBy {
+                    it.d_day.split("-").lastOrNull()?.toIntOrNull() ?: it.d_day.split("+").lastOrNull()?.toIntOrNull()?.let { it + 100 }
+                }
+            else
+                contests.sortByDescending {
+                    it.d_day.split("-").lastOrNull()?.toIntOrNull() ?: it.d_day.split("+").lastOrNull()?.toIntOrNull()?.let { it + 100 }
+                }
+            viewBinding.contestList.adapter?.notifyDataSetChanged()
+        }
+        viewBinding.lateOrder.setOnClickListener {
+            isClickedLate = !isClickedLate
+            if (isClickedLate)
+                contests.sortBy { it.read_cnt.toIntOrNull() }
+            else
+                contests.sortByDescending { it.read_cnt.toIntOrNull() }
             viewBinding.contestList.adapter?.notifyDataSetChanged()
         }
         viewBinding.contestList.adapter = contests_adapter
@@ -87,10 +117,6 @@ class HomeFragment : Fragment() {
 
         val apiService = retrofit.create(ApiService::class.java)
 
-        val requestBody = RequestBody.create(
-            MediaType.parse("applycation/json"),
-            "{\"uid\": \"fKDS6vZokPhWhjwnNCrdRuOF2vJ3\"}"
-        )
 
         lifecycleScope.launch {
             val requestBody = RequestBody.create(
@@ -107,9 +133,5 @@ class HomeFragment : Fragment() {
                 // 에러 처리 필요한 경우 추가
             }
         }
-
-
-//        contests.add(ContestData("2023 버블탭 아이디어 공모전~~~~~~~", "고용노동부,한국산업인력공단", "www.ggg", 6, false, 10))
-
     }
 }

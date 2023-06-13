@@ -22,7 +22,6 @@ class ContestAdapter (val items: ArrayList<ContestData>) :
         fun bind(data: ContestData, position: Int) {
             viewBinding.contestTitle.text = data.title
             viewBinding.contestSupport.text=data.sub_title
-//            viewBinding.dday.text="D-"+data.date.toString()
             viewBinding.dday.text=data.d_day
 
 

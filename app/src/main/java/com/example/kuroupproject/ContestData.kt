@@ -1,5 +1,6 @@
 package com.example.kuroupproject
 
+
 data class ContestData(
     var title: String,
     var detail_url: String,
@@ -7,4 +8,4 @@ data class ContestData(
     var d_day: String,
     var read_cnt: String,
     var clipped: Boolean,
-)
+) : java.io.Serializable
