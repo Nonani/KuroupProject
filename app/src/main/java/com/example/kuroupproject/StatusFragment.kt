@@ -38,24 +38,17 @@ class StatusFragment : Fragment() {
 
         viewBinding.radioGroup.setOnCheckedChangeListener { group, id ->
             Log.d("test",id.toString())
-            when(id){
-                2131231293->{
-                    Log.d("test","id 0")
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_status,ApplyStatusFragment())
-                        .commitAllowingStateLoss()
-                }
-                2131231294->{
-                    Log.d("test","id 1")
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.frame_status,CreatedStatusFragment())
-                        .commitAllowingStateLoss()
-                }
-                else-> {
-
-                }
+            if(id==R.id.radioButton){
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_status,ApplyStatusFragment())
+                    .commitAllowingStateLoss()
+            }
+            else{
+                requireActivity().supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.frame_status,CreatedStatusFragment())
+                    .commitAllowingStateLoss()
             }
         }
     }
