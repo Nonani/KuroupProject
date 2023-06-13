@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kuroupproject.datas.UserData
-import com.example.kuroupproject.databinding.RowUserBinding
+import com.example.kuroupproject.databinding.RowApplyUserBinding
 
 class ApplyUserDataAdapter(val items: ArrayList<UserData>) :
 RecyclerView.Adapter<ApplyUserDataAdapter.ViewHolder>() {
@@ -15,7 +15,7 @@ RecyclerView.Adapter<ApplyUserDataAdapter.ViewHolder>() {
     var itemClickListener1: OnItemClickListener? = null
     var itemClickListener2: OnItemClickListener? = null
 
-    inner class ViewHolder(val binding: RowUserBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: RowApplyUserBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.acceptBtn.setOnClickListener { itemClickListener1?.OnItemClick(items[adapterPosition]) }
             binding.rejectBtn.setOnClickListener { itemClickListener2?.OnItemClick(items[adapterPosition]) }
@@ -23,7 +23,7 @@ RecyclerView.Adapter<ApplyUserDataAdapter.ViewHolder>() {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        var view = RowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        var view = RowApplyUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
