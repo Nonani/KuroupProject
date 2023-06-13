@@ -149,7 +149,6 @@ class CreatedStatusFragment : Fragment() {
                 val list2 = value2.map { item ->
                     gson.fromJson(gson.toJson(item), UserData::class.java)
                 }
-                // 결과를 ArrayList<TeamData> 타입으로 변환
                 println(list1)
                 data1 = ArrayList<UserData>(list1)
                 data2 = ArrayList<UserData>(list2)

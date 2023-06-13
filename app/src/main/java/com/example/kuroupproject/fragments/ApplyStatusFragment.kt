@@ -11,9 +11,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.kuroupproject.adapters.ApplyTeamDataAdapter
+import com.example.kuroupproject.adapters.AcceptedTeamDataAdapter
 import com.example.kuroupproject.datas.TeamData
-import com.example.kuroupproject.datas.UserData
-import com.example.kuroupproject.adapters.ApplyUserDataAdapter
 import com.example.kuroupproject.databinding.FragmentStatusApplyBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -25,8 +25,10 @@ import org.json.JSONObject
 class ApplyStatusFragment : Fragment() {
 
     private lateinit var binding : FragmentStatusApplyBinding
-    var data1: ArrayList<UserData> = ArrayList()
-    lateinit var adapter: ApplyUserDataAdapter
+    lateinit var data1: ArrayList<TeamData>
+    lateinit var data2: ArrayList<TeamData>
+    lateinit var adapter1: ApplyTeamDataAdapter
+    lateinit var adapter2: AcceptedTeamDataAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,22 +38,29 @@ class ApplyStatusFragment : Fragment() {
         return binding.root
     }
 
-    private fun initRecyclerView(list: List<TeamData>) {
+    private fun initRecyclerView() {
         binding.contestList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = ApplyUserDataAdapter(data1)
+        adapter1 = ApplyTeamDataAdapter(data1)
 
-        adapter.itemClickListener1 = object: ApplyUserDataAdapter.OnItemClickListener{
-            override fun OnItemClick(data: UserData) {
-
-            }
-        }
-        adapter.itemClickListener2 = object: ApplyUserDataAdapter.OnItemClickListener{
-            override fun OnItemClick(data: UserData) {
+        adapter1.itemClickListener1 = object: ApplyTeamDataAdapter.OnItemClickListener{
+            override fun OnItemClick(data: TeamData) {
 
             }
         }
-        binding.contestList.adapter = adapter
+        binding.contestList.adapter = adapter1
+
+        binding.contestList2.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter2 = AcceptedTeamDataAdapter(data2)
+
+        adapter2.itemClickListener1 = object: AcceptedTeamDataAdapter.OnItemClickListener{
+            override fun OnItemClick(data: TeamData) {
+
+            }
+        }
+        binding.contestList2.adapter = adapter2
+
 
     }
 
@@ -89,22 +98,19 @@ class ApplyStatusFragment : Fragment() {
                 // Handle the successful response here
                 val gson = Gson()
                 val resultMap: Map<String, Any> = gson.fromJson(response, object : TypeToken<Map<String, Any>>() {}.type)
-                val value1: ArrayList<Map<String,String>> = resultMap["accepted_list"] as ArrayList<Map<String, String>>
-
-                val list = value1.map { item ->
-                    TeamData(
-                        detail_url = item["detail_url"] as String,
-                        team_max_number = (item["team_max_number"] as Double).toInt(),
-                        content = item["content"] as String,
-                        contest_title = item["contest_title"] as String,
-                        leader_uid = item["leader_uid"] as String,
-                        title = item["title"] as String,
-                        members_info = (item["members_info"] as List<Map<String, String>>).toMutableList()
-                    )
+                val value1: ArrayList<Map<String,String>> = resultMap["waiting_list"] as ArrayList<Map<String, String>>
+                val value2: ArrayList<Map<String,String>> = resultMap["accepted_list"] as ArrayList<Map<String, String>>
+                val list1 = value1.map { item ->
+                    gson.fromJson(gson.toJson(item), TeamData::class.java)
                 }
-                initRecyclerView(list)
+                val list2 = value2.map { item ->
+                    gson.fromJson(gson.toJson(item), TeamData::class.java)
+                }
+                println(list1)
+                data1 = ArrayList<TeamData>(list1)
+                data2 = ArrayList<TeamData>(list2)
+                initRecyclerView()
 
-                println("Response: $list")
             },
             onError = { errorMessage ->
                 // Handle the error case here
