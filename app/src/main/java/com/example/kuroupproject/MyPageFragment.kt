@@ -47,7 +47,7 @@ class MyPageFragment : Fragment() {
                     val mainPart = user["mainPart"] as String
                     val phonenum = user["phonenum"] as String
                     val onelineExplain = user["onelineExplain"] as String
-)
+
                     viewBinding.myName.text = name
                     viewBinding.myGenderInfo.text = gender
                     viewBinding.myLocationInfo.text = location

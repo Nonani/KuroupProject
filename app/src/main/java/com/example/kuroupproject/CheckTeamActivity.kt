@@ -29,13 +29,16 @@ class CheckTeamActivity : AppCompatActivity() {
 
         viewBinding.createTeamButton.setOnClickListener {
             val intent = Intent(this, CreateTeamActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
 
         viewBinding.backCheck.setOnClickListener {
             val intent = Intent(this, DetailActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }
+
     }
     // 지원하기 눌렀을때 Activity 구현해야됨
 
