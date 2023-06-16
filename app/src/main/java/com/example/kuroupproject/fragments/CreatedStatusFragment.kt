@@ -1,6 +1,8 @@
 package com.example.kuroupproject.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +13,12 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.kuroupproject.adapters.AcceptedUserDataAdapter
 import com.example.kuroupproject.datas.UserData
 import com.example.kuroupproject.adapters.ApplyUserDataAdapter
 import com.example.kuroupproject.databinding.FragmentStatusCreatedBinding
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,7 +28,8 @@ class CreatedStatusFragment : Fragment() {
     private lateinit var binding : FragmentStatusCreatedBinding
     lateinit var data1: ArrayList<UserData>
     lateinit var data2: ArrayList<UserData>
-    lateinit var adapter: ApplyUserDataAdapter
+    lateinit var adapter1: ApplyUserDataAdapter
+    lateinit var adapter2: AcceptedUserDataAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,19 +42,68 @@ class CreatedStatusFragment : Fragment() {
     private fun initRecyclerView() {
         binding.contestList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        adapter = ApplyUserDataAdapter(data1)
+        binding.contestList2.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        adapter1 = ApplyUserDataAdapter(data1)
 
-        adapter.itemClickListener1 = object: ApplyUserDataAdapter.OnItemClickListener{
+        adapter1.itemClickListener1 = object: ApplyUserDataAdapter.OnItemClickListener{
+        //수락버튼 클릭 이벤트 추가
             override fun OnItemClick(data: UserData) {
+            var auth = Firebase.auth
+            val db = FirebaseFirestore.getInstance()
+            val postsCollectionRef = db.collection("posts")
+            postsCollectionRef.whereEqualTo("leader_uid", auth.currentUser!!.uid).get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot.documents) {
+                        val membersInfo = document["members_info"] as List<Map<String, String>>?
 
+                        val mutableMembersInfo = membersInfo?.map { it.toMutableMap() }?.toMutableList()
+                        mutableMembersInfo?.forEach { member ->
+                            if (member["uid"] == data.uid && member["state"] == "waiting") {
+                                member["state"] = "accepted"
+                            }
+                        }
+                        document.reference.update("members_info", mutableMembersInfo)
+                        init()
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error getting documents: $exception")
+                }
             }
         }
-        adapter.itemClickListener2 = object: ApplyUserDataAdapter.OnItemClickListener{
+        //거절버튼 클릭 이벤트 추가
+        adapter1.itemClickListener2 = object: ApplyUserDataAdapter.OnItemClickListener{
             override fun OnItemClick(data: UserData) {
+                var auth = Firebase.auth
+                val db = FirebaseFirestore.getInstance()
+                val postsCollectionRef = db.collection("posts")
+                postsCollectionRef.whereEqualTo("leader_uid", auth.currentUser!!.uid).get()
+                    .addOnSuccessListener { querySnapshot ->
+                        for (document in querySnapshot.documents) {
+                            val membersInfo = document["members_info"] as List<Map<String, String>>?
 
+                            val mutableMembersInfo = membersInfo?.map { it.toMutableMap() }?.toMutableList()
+                            mutableMembersInfo?.forEach { member ->
+                                if (member["uid"] == data.uid && member["state"] == "waiting") {
+                                    member["state"] = "rejected"
+                                }
+                            }
+                            document.reference.update("members_info", mutableMembersInfo)
+                            init()
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.e(TAG, "Error getting documents: $exception")
+                    }
             }
         }
-        binding.contestList.adapter = adapter
+        binding.contestList.adapter = adapter1
+
+
+        adapter2 = AcceptedUserDataAdapter(data2)
+
+        binding.contestList2.adapter = adapter2
 
     }
 
@@ -92,12 +146,14 @@ class CreatedStatusFragment : Fragment() {
                 val list1 = value1.map { item ->
                     gson.fromJson(gson.toJson(item), UserData::class.java)
                 }
-
-                // 결과를 ArrayList<TeamData> 타입으로 변환
+                val list2 = value2.map { item ->
+                    gson.fromJson(gson.toJson(item), UserData::class.java)
+                }
+                println(list1)
                 data1 = ArrayList<UserData>(list1)
+                data2 = ArrayList<UserData>(list2)
                 initRecyclerView()
 
-                println("Response: $data1")
             },
             onError = { errorMessage ->
                 // Handle the error case here

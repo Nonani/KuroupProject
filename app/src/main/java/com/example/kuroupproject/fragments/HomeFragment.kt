@@ -128,7 +128,6 @@ class HomeFragment : Fragment() {
             try {
                 contests = apiService.getContests(requestBody)
                 setupRecyclerView(contests)
-                contests_adapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 e.printStackTrace()
                 // 에러 처리 필요한 경우 추가

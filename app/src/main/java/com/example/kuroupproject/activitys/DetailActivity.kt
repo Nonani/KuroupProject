@@ -5,7 +5,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.init
 import com.example.kuroupproject.datas.ContestData
 import com.example.kuroupproject.datas.ContestDetailData
 import com.example.kuroupproject.databinding.ActivityDetailBinding
@@ -32,14 +34,17 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDetailBinding
     lateinit var data : ContestData
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
+
         @Suppress("DEPRECATION")
         data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             intent.getSerializableExtra("contestData", ContestData::class.java)!!
         else
             intent.getSerializableExtra("contestData") as ContestData
+
         setContentView(viewBinding.root)
         init(data!!)
     }

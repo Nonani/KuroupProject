@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.adapters.BookmarkAdapter
 import com.example.kuroupproject.datas.TeamCheckData
 import com.example.kuroupproject.adapters.TeamAdapter
-import com.example.kuroupproject.adapters.TeamDataAdapter
 import com.example.kuroupproject.databinding.ActivityCheckTeamBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
