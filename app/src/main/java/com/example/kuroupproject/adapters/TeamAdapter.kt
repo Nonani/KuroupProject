@@ -29,7 +29,7 @@ class TeamAdapter(val items: ArrayList<TeamCheckData>) :
 
         fun bind(data: TeamCheckData, position: Int) {
             viewBinding.mention.text = data.title
-            viewBinding.place.text = "주 활동지역 : " + data.place
+            viewBinding.place.text = "내용 : " + data.place
             viewBinding.nowStatus.text =
                 "모집현황 : " + data.nowNumber.toString() + " / " + data.totalNumber.toString()
             viewBinding.supply.setOnClickListener {

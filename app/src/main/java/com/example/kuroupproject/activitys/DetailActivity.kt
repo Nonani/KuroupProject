@@ -30,13 +30,14 @@ interface ApiService1 {
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDetailBinding
+    lateinit var data : ContestData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
         @Suppress("DEPRECATION")
-        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            intent.getSerializableExtra("contestData", ContestData::class.java)
+        data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            intent.getSerializableExtra("contestData", ContestData::class.java)!!
         else
             intent.getSerializableExtra("contestData") as ContestData
         setContentView(viewBinding.root)
@@ -46,6 +47,7 @@ class DetailActivity : AppCompatActivity() {
     private fun init(contestData: ContestData) {
         viewBinding.createTeamButton.setOnClickListener {
             val intent = Intent(this, CheckTeamActivity::class.java)
+            intent.putExtra("contestTitle",data.title)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             startActivity(intent)
         }

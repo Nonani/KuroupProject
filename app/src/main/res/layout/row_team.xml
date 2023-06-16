@@ -24,7 +24,7 @@
         android:id="@+id/place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="주 활동지역 : 서울"
+        android:text="내용 : 서울"
         android:textColor="@color/mypage_semibrown"
         android:textSize="12dp"
         android:layout_marginTop="10dp"
