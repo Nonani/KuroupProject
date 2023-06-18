@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.activitys.DetailActivity
-import com.example.kuroupproject.datas.BookmarkData
-import com.example.kuroupproject.adapters.BookmarkAdapter
+import com.example.kuroupproject.adapters.ContestAdapter
 import com.example.kuroupproject.databinding.FragmentMyPageBinding
+import com.example.kuroupproject.datas.ContestData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,13 +20,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MyPageFragment : Fragment() {
-    private lateinit var viewBinding : FragmentMyPageBinding
-    var bookmarks:ArrayList<BookmarkData> = ArrayList()
-    lateinit var adapter: BookmarkAdapter
+    private lateinit var viewBinding: FragmentMyPageBinding
+    var contests: ArrayList<ContestData> = ArrayList()
+    lateinit var adapter: ContestAdapter
     lateinit var firestore: FirebaseFirestore
-    lateinit var userId : String
-    lateinit var auth : FirebaseAuth
-    lateinit var currentUser : FirebaseUser
+    lateinit var userId: String
+    lateinit var auth: FirebaseAuth
+    lateinit var currentUser: FirebaseUser
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +67,7 @@ class MyPageFragment : Fragment() {
             }
             .addOnFailureListener { e ->
                 // 사용자 데이터를 불러오는 중에 오류가 발생
-                Log.d("error","사용자 데이터를 불러오는 중에 오류가 발생하였습니다.")
+                Log.d("error", "사용자 데이터를 불러오는 중에 오류가 발생하였습니다.")
             }
     }
 
@@ -77,61 +78,38 @@ class MyPageFragment : Fragment() {
             .addOnSuccessListener { documentSnapshot ->
                 val user = documentSnapshot.data
                 user?.let {
-                    val scrapDataList = user["scrap"] as? ArrayList<HashMap<String,String>>
-                    if(scrapDataList!=null&&scrapDataList.isNotEmpty()){
+                    val scrapDataList = user["scrap"] as? ArrayList<HashMap<String, String>>
+                    if (scrapDataList != null && scrapDataList.isNotEmpty()) {
                         for (scrapData in scrapDataList) {
                             val title = scrapData["title"] ?: ""
                             val dDay = scrapData["d_day"] ?: ""
                             val support = scrapData["support"] ?: ""
+                            val url = scrapData["detail_url"] ?: ""
+                            val read_cnt = scrapData["read_cnt"] ?: ""
+                            val clipped = scrapData["clipped"] as? Boolean ?: false
 
-                            val bookmarkData = BookmarkData(title, support, dDay)
+                            val contestData = ContestData(title, url, support, dDay, read_cnt, clipped)
 
-                            bookmarks.add(bookmarkData)
+                            contests.add(contestData)
                         }
                     }
                 }
                 // 데이터를 추가한 후 RecyclerView 어댑터 설정 및 업데이트
-                viewBinding.recyclerviewBookmark.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                adapter = BookmarkAdapter(bookmarks)
+                viewBinding.recyclerviewBookmark.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                adapter = ContestAdapter(contests)
 
-                adapter.itemClickListener = object : BookmarkAdapter.OnItemClickListener {
-                    override fun OnItemClick(data: BookmarkData) {
-                        CoroutineScope(Dispatchers.Main).launch {
-                            try {
-                                // 해당 아이템 데이터를 삭제
-                                firestore.collection("users").document(userId)
-                                    .get()
-                                    .addOnSuccessListener { documentSnapshot ->
-                                        val user = documentSnapshot.data
-                                        user?.let {
-                                            val scrapDataList = user["scrap"] as? ArrayList<HashMap<String, String>>
-                                            if (scrapDataList != null) {
-                                                scrapDataList.removeIf { scrapData ->
-                                                    scrapData["title"] == data.title &&
-                                                            scrapData["d_day"] == data.d_day.toString() &&
-                                                            scrapData["support"] == data.support
-                                                }
-                                                // 수정된 데이터를 Firestore에 업데이트
-                                                firestore.collection("users").document(userId)
-                                                    .update("scrap", scrapDataList)
-                                                    .addOnSuccessListener {
-                                                        // 데이터 업데이트 성공
-                                                    }
-                                                    .addOnFailureListener { e ->
-                                                        // 데이터 업데이트 실패
-                                                    }
-                                            }
-                                        }
-                                    }
-                                    .addOnFailureListener { e ->
-                                        // 사용자 데이터를 불러오는 중에 오류가 발생했습니다.
-                                        // TODO: 오류 처리
-                                    }
-
-                            } catch (e: Exception) {
-                                // TODO: 오류 처리
-                            }
-                        }
+                adapter.itemClickListener = object : ContestAdapter.OnItemClickListener {
+                    override fun OnItemClick(
+                        holder: ContestAdapter.ViewHolder,
+                        view: View,
+                        data: ContestData,
+                        position: Int
+                    ) {
+                        val intent = Intent(requireActivity(), DetailActivity::class.java)
+                        intent.putExtra("contestData", data)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent)
                     }
                 }
                 viewBinding.recyclerviewBookmark.adapter = adapter
