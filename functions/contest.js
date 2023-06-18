@@ -46,10 +46,7 @@ router.post('/list', async (req, res) => {
             dictObject['sub_title'] = sub_title
             dictObject['d_day'] = d_day
             dictObject['read_cnt'] = read_cnt
-            if (scrap.includes(title))
-                dictObject['clipped'] = true
-            else
-                dictObject['clipped'] = false
+            dictObject['clipped'] = scrap.some((item) => item.title === title);
 
             contests.push(dictObject)
             // console.log(i + 1, contests[i]);
