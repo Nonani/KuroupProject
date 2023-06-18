@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.datas.TeamCheckData
 import com.example.kuroupproject.adapters.TeamAdapter
@@ -17,6 +19,7 @@ class CheckTeamActivity : AppCompatActivity() {
     lateinit var db : FirebaseFirestore
     lateinit var title : String
     lateinit var adapter: TeamAdapter
+    private lateinit var checkTeamActivityResultLauncher: ActivityResultLauncher<Intent>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityCheckTeamBinding.inflate(layoutInflater)
@@ -25,6 +28,13 @@ class CheckTeamActivity : AppCompatActivity() {
         title = intent.getStringExtra("contestTitle")!!
         init_data()
         init()
+        checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // 데이터를 다시 로드합니다.
+                init_data()
+                init()
+            }
+        }
     }
 
     private fun init() {
@@ -40,7 +50,7 @@ class CheckTeamActivity : AppCompatActivity() {
         }
 
         viewBinding.backCheck.setOnClickListener {
-            setResult(Activity.RESULT_OK) // 인수 없이 setResult를 호출하여 확인합니다.
+            setResult(Activity.RESULT_OK)
             finish()
             overridePendingTransition(0, 0)
         }

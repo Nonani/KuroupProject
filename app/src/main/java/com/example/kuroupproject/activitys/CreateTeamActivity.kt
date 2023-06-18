@@ -1,5 +1,6 @@
 package com.example.kuroupproject.activitys
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,9 +31,9 @@ class CreateTeamActivity : AppCompatActivity() {
 
     private fun initActivity(){
         viewBinding.backCreate.setOnClickListener{
-            val intent = Intent(this, CheckTeamActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+            setResult(Activity.RESULT_OK)
+            finish()
+            overridePendingTransition(0, 0)
         }
     }
 }
