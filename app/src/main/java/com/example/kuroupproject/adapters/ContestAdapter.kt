@@ -79,7 +79,10 @@ class ContestAdapter(val items: ArrayList<ContestData>) :
             val scrapData = hashMapOf(
                 "d_day" to contest.d_day,
                 "support" to contest.sub_title,
-                "title" to contest.title
+                "title" to contest.title,
+                "detail_url" to contest.detail_url,
+                "read_cnt" to contest.read_cnt,
+                "clipped" to true
             )
             firestore.collection("users").document(userId).update("scrap", FieldValue.arrayUnion(scrapData))
                 .addOnSuccessListener {
@@ -100,7 +103,10 @@ class ContestAdapter(val items: ArrayList<ContestData>) :
             val scrapData = hashMapOf(
                 "d_day" to contest.d_day,
                 "support" to contest.sub_title,
-                "title" to contest.title
+                "title" to contest.title,
+                "detail_url" to contest.detail_url,
+                "read_cnt" to contest.read_cnt,
+                "clipped" to true
             )
             firestore.collection("users").document(userId).update("scrap", FieldValue.arrayRemove(scrapData))
                 .addOnSuccessListener {
