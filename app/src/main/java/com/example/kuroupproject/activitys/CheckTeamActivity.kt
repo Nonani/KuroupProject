@@ -1,12 +1,10 @@
 package com.example.kuroupproject.activitys
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kuroupproject.adapters.BookmarkAdapter
 import com.example.kuroupproject.datas.TeamCheckData
 import com.example.kuroupproject.adapters.TeamAdapter
 import com.example.kuroupproject.databinding.ActivityCheckTeamBinding
@@ -42,9 +40,9 @@ class CheckTeamActivity : AppCompatActivity() {
         }
 
         viewBinding.backCheck.setOnClickListener {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+            setResult(Activity.RESULT_OK) // 인수 없이 setResult를 호출하여 확인합니다.
+            finish()
+            overridePendingTransition(0, 0)
         }
 
     }
@@ -58,13 +56,17 @@ class CheckTeamActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
+                    val documentId = document.id
                     val content = document.getString("content")
                     val title = document.getString("title")
                     val teamMaxNumber = document.getLong("team_max_number")
                     val membersInfo = document.get("members_info") as List<*>
-                    val membersInfoSize= membersInfo.size
+                    val membersInfoSize = membersInfo.filter { memberInfo ->
+                        val memberState = (memberInfo as Map<String, String>).get("state") as String
+                        memberState == "accepted"
+                    }.size
 
-                    teams.add(TeamCheckData(title!!,content!!,membersInfoSize,teamMaxNumber!!))
+                    teams.add(TeamCheckData(documentId!!, title!!,content!!,membersInfoSize,teamMaxNumber!!))
                 }
                 teams_adapter.notifyDataSetChanged()
             }

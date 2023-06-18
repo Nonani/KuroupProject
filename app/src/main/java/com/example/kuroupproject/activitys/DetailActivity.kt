@@ -1,10 +1,13 @@
 package com.example.kuroupproject.activitys
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.init
@@ -32,7 +35,9 @@ interface ApiService1 {
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDetailBinding
-    lateinit var data : ContestData
+    var data: ContestData? = null
+    private lateinit var checkTeamActivityResultLauncher: ActivityResultLauncher<Intent>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,18 +48,29 @@ class DetailActivity : AppCompatActivity() {
         data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
             intent.getSerializableExtra("contestData", ContestData::class.java)!!
         else
-            intent.getSerializableExtra("contestData") as ContestData
+            intent.getSerializableExtra("contestData") as ContestData?
 
         setContentView(viewBinding.root)
-        init(data!!)
+        if (data != null) {
+            init(data!!)
+        } else {
+            Toast.makeText(this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+        }
+
+        checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // 데이터를 다시 로드합니다.
+                init(data!!)
+            }
+        }
     }
 
     private fun init(contestData: ContestData) {
         viewBinding.createTeamButton.setOnClickListener {
             val intent = Intent(this, CheckTeamActivity::class.java)
-            intent.putExtra("contestTitle",data.title)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+            intent.putExtra("contestTitle",data!!.title)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            checkTeamActivityResultLauncher.launch(intent)
         }
 
         viewBinding.backDetail.setOnClickListener {
