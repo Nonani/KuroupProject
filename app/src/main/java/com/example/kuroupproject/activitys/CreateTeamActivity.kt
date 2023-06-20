@@ -81,13 +81,13 @@ class CreateTeamActivity : AppCompatActivity() {
                 Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_SHORT)
                     .show()
                 viewBinding.recruitTitle.requestFocus()
+                return@setOnClickListener
             }else if(viewBinding.content.text.isEmpty()){
                 Toast.makeText(this, "팀 소개를 입력해주세요.", Toast.LENGTH_SHORT)
                     .show()
                 viewBinding.content.requestFocus()
+                return@setOnClickListener
             }
-            return@setOnClickListener
-
 
             insertData()
             setResult(Activity.RESULT_OK)
