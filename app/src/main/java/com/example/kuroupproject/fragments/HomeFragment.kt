@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewBinding: FragmentHomeBinding
 
     var contests: ArrayList<ContestData> = ArrayList()
+
     lateinit var contests_adapter: ContestAdapter
     var isClickedBoom: Boolean = false
     var isClickedLate: Boolean = false
@@ -58,13 +59,13 @@ class HomeFragment : Fragment() {
         if (!::contests_adapter.isInitialized) {
             init_data()
         } else {
-            setupRecyclerView(contests)
+            setupRecyclerView()
         }
     }
 
 
 
-    private fun setupRecyclerView(contests: ArrayList<ContestData>) {
+    private fun setupRecyclerView() {
         viewBinding.contestList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         contests_adapter = ContestAdapter(contests)
@@ -98,14 +99,7 @@ class HomeFragment : Fragment() {
                 }
             viewBinding.contestList.adapter?.notifyDataSetChanged()
         }
-        viewBinding.lateOrder.setOnClickListener {
-            isClickedLate = !isClickedLate
-            if (isClickedLate)
-                contests.sortBy { it.read_cnt.toIntOrNull() }
-            else
-                contests.sortByDescending { it.read_cnt.toIntOrNull() }
-            viewBinding.contestList.adapter?.notifyDataSetChanged()
-        }
+
         viewBinding.contestList.adapter = contests_adapter
     }
 
@@ -135,7 +129,7 @@ class HomeFragment : Fragment() {
 
             try {
                 contests = apiService.getContests(requestBody)
-                setupRecyclerView(contests)
+                setupRecyclerView()
             } catch (e: Exception) {
                 e.printStackTrace()
                 // 에러 처리 필요한 경우 추가
