@@ -58,7 +58,7 @@ class CheckTeamActivity : AppCompatActivity() {
             val intent = Intent(this, CreateTeamActivity::class.java)
             intent.putExtra("contestTitle", title)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent)
+            checkTeamActivityResultLauncher.launch(intent)
         }
 
         viewBinding.backCheck.setOnClickListener {
