@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -46,6 +48,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var currentUser: FirebaseUser
     var contests: ArrayList<ContestData> = ArrayList()
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,12 +68,14 @@ class DetailActivity : AppCompatActivity() {
                 intent.getSerializableExtra("contestData") as ContestData?
         }
 
-        setContentView(viewBinding.root)
         if (data != null) {
             init(data!!)
         } else {
 //            Toast.makeText(this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+            progressBar.visibility = View.GONE
         }
+        setContentView(viewBinding.root)
+
 
         checkTeamActivityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -82,6 +87,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun bringData(title: String, onDataLoaded: (ContestData) -> Unit) {
+        viewBinding.progressBar.visibility = View.VISIBLE // 데이터 로드 전 ProgressBar 표시
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
         userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
@@ -109,6 +115,7 @@ class DetailActivity : AppCompatActivity() {
                     if (contest.title == title) {
                         data = contest
                         onDataLoaded(data!!)
+                        viewBinding.progressBar.visibility = View.GONE
                         break
                     }
                 }
@@ -148,10 +155,11 @@ class DetailActivity : AppCompatActivity() {
         val detailUrl = contestData.detail_url
         loadDetailData(detailUrl)
 
-
     }
 
     private fun loadDetailData(detailUrl: String) {
+        viewBinding.progressBar.visibility = View.VISIBLE // ProgressBar를 표시합니다.
+
         CoroutineScope(Dispatchers.Main).launch {
             val requestBodyJson = "{\"url\": \"$detailUrl\"}"
             val requestBody = RequestBody.create(
@@ -176,20 +184,27 @@ class DetailActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     val detailData = response.body()
+                    viewBinding.progressBar.visibility = View.GONE // 데이터 가져온 후 ProgressBar 숨깁니다.
                     showDetailData(detailData)
                 } else {
                     Toast.makeText(this@DetailActivity, "Failed to load data", Toast.LENGTH_SHORT)
                         .show()
+                    viewBinding.progressBar.visibility = View.GONE // 데이터 가져온 후 ProgressBar 숨깁니다.
+
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@DetailActivity, "Error: ${e.message}", Toast.LENGTH_SHORT)
                     .show()
+                viewBinding.progressBar.visibility = View.GONE // 데이터 가져온 후 ProgressBar 숨깁니다.
+
             }
         }
     }
 
 
+
     private fun showDetailData(detailData: ContestDetailData?) {
+
         if (detailData != null) {
             // 데이터를 TextView에 추가
             Glide.with(this).load(detailData.imgUrl).into(viewBinding.contestImg)

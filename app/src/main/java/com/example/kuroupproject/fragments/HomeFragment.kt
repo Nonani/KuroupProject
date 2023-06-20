@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.datas.ContestData
@@ -45,6 +46,7 @@ class HomeFragment : Fragment() {
     lateinit var userId: String
     lateinit var auth: FirebaseAuth
     lateinit var currentUser: FirebaseUser
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +58,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progressBar = viewBinding.progressBar
         if (!::contests_adapter.isInitialized) {
             init_data()
         } else {
@@ -129,9 +132,11 @@ class HomeFragment : Fragment() {
 
             try {
                 contests = apiService.getContests(requestBody)
+                progressBar.visibility = View.GONE
                 setupRecyclerView()
             } catch (e: Exception) {
                 e.printStackTrace()
+                progressBar.visibility = View.GONE
                 // 에러 처리 필요한 경우 추가
             }
         }
