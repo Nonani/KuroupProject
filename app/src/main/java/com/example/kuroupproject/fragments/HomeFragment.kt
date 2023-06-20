@@ -12,6 +12,8 @@ import com.example.kuroupproject.datas.ContestData
 import com.example.kuroupproject.activitys.DetailActivity
 import com.example.kuroupproject.adapters.ContestAdapter
 import com.example.kuroupproject.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -39,6 +41,9 @@ class HomeFragment : Fragment() {
     lateinit var contests_adapter: ContestAdapter
     var isClickedBoom: Boolean = false
     var isClickedLate: Boolean = false
+    lateinit var userId: String
+    lateinit var auth: FirebaseAuth
+    lateinit var currentUser: FirebaseUser
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -106,6 +111,9 @@ class HomeFragment : Fragment() {
 
 
     private fun init_data() {
+        auth = FirebaseAuth.getInstance()
+        currentUser = auth.currentUser!!
+        userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
         val httpClient = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
@@ -122,7 +130,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             val requestBody = RequestBody.create(
                 MediaType.parse("application/json"),
-                "{\"uid\": \"fKDS6vZokPhWhjwnNCrdRuOF2vJ3\"}"
+                "{\"uid\": \"$userId\"}"
             )
 
             try {
