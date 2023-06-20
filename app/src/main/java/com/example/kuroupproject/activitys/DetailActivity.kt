@@ -48,7 +48,6 @@ class DetailActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var currentUser: FirebaseUser
     var contests: ArrayList<ContestData> = ArrayList()
-    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,8 +79,7 @@ class DetailActivity : AppCompatActivity() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     // 데이터를 다시 로드합니다.
-                    init(data!!)
-                }
+                    viewBinding.progressBar.visibility = View.INVISIBLE                }
             }
     }
 
