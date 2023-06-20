@@ -31,11 +31,26 @@
                 android:src="@drawable/logo_icon" />
         </androidx.appcompat.widget.Toolbar>
 
+        <TextView
+            android:id="@+id/tv_none1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/mypage_myinfo_box"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:text="모집중인팀이 없습니다!"
+            android:textAlignment="center" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/teamList"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" >
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/create_team_button"
