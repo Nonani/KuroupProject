@@ -49,6 +49,7 @@ class ApplyStatusFragment : Fragment() {
             override fun OnItemClick(data: TeamData) {
                 val intent = Intent(requireActivity(), DetailActivity::class.java)
                 intent.putExtra("contest_title", data.contest_title)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
             }
         }
@@ -62,6 +63,7 @@ class ApplyStatusFragment : Fragment() {
             override fun OnItemClick(data: TeamData) {
                 val intent = Intent(requireActivity(), DetailActivity::class.java)
                 intent.putExtra("contest_title", data.contest_title)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
             }
         }
