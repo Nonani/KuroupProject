@@ -29,7 +29,7 @@ class CheckTeamActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
         val intent= intent
         title = intent.getStringExtra("contestTitle")!!
-        updateEmptyTV()
+
         init_data()
         init()
         checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -39,6 +39,7 @@ class CheckTeamActivity : AppCompatActivity() {
                 init()
             }
         }
+        updateEmptyTV()
     }
     private fun updateEmptyTV() {
         if(teams.isEmpty())
@@ -88,6 +89,8 @@ class CheckTeamActivity : AppCompatActivity() {
                     teams.add(TeamCheckData(documentId!!, title!!,content!!,membersInfoSize,teamMaxNumber!!))
                 }
                 teams_adapter.notifyDataSetChanged()
+                updateEmptyTV()
             }
+
     }
 }
