@@ -66,13 +66,10 @@ class CreateTeamActivity : AppCompatActivity() {
         )
     }
     private fun initSpinner() {
-        val locations = resources.getStringArray(R.array.spinnerLocation)
         val nums = resources.getStringArray(R.array.spinnerRecruitNum)
 
-        val adapter1 = ArrayAdapter(this, android.R.layout.simple_spinner_item, locations)
         val adapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, nums)
 
-        viewBinding.spinnerLocation.adapter=adapter1
         viewBinding.spinnerNumber.adapter=adapter2
     }
 
