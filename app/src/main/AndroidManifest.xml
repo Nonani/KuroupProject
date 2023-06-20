@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.KuroupProject"
+        android:icon="@drawable/logo_icon"
         tools:targetApi="31">
         <activity
             android:name=".activitys.CheckTeamActivity"
