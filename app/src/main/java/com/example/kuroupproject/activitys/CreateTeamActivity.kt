@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.example.kuroupproject.R
 import com.example.kuroupproject.databinding.ActivityCreateTeamBinding
 import com.example.kuroupproject.datas.ContestData
@@ -75,8 +76,22 @@ class CreateTeamActivity : AppCompatActivity() {
 
     private fun initActivity(){
         viewBinding.createTeamButton.setOnClickListener {
+
+            if(viewBinding.recruitTitle.text.isEmpty()){
+                Toast.makeText(this, "제목을 입력해주세요.", Toast.LENGTH_SHORT)
+                    .show()
+                viewBinding.recruitTitle.requestFocus()
+            }else if(viewBinding.content.text.isEmpty()){
+                Toast.makeText(this, "팀 소개를 입력해주세요.", Toast.LENGTH_SHORT)
+                    .show()
+                viewBinding.content.requestFocus()
+            }
+            return@setOnClickListener
+
+
             insertData()
             setResult(Activity.RESULT_OK)
+            Toast.makeText(this, "팀이 생성되었습ㅛ다.", Toast.LENGTH_SHORT)
             finish()
         }
         viewBinding.backCreate.setOnClickListener{
