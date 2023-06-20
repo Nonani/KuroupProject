@@ -47,7 +47,6 @@ class ContestAdapter(val items: ArrayList<ContestData>) :
             else
                 viewBinding.imageStar.setImageResource(R.drawable.bookmark_unselected)
 
-
             viewBinding.imageStar.setOnClickListener {
                 //즐겨찾기
                 data.clipped = !data.clipped

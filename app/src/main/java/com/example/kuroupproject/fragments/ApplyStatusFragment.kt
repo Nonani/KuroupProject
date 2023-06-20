@@ -40,10 +40,23 @@ class ApplyStatusFragment : Fragment() {
         return binding.root
     }
 
+    private fun updateEmptyTV() {
+        if(data1.isEmpty())
+            binding.tvNone1.visibility=View.VISIBLE
+        else
+            binding.tvNone1.visibility=View.GONE
+        if(data2.isEmpty())
+            binding.tvNone2.visibility=View.VISIBLE
+        else
+            binding.tvNone2.visibility=View.GONE
+    }
+
     private fun initRecyclerView() {
         binding.contestList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         adapter1 = ApplyTeamDataAdapter(data1)
+
+        updateEmptyTV()
 
         adapter1.itemClickListener1 = object: ApplyTeamDataAdapter.OnItemClickListener{
             override fun OnItemClick(data: TeamData) {

@@ -37,7 +37,15 @@ class MyPageFragment : Fragment() {
         initMyData()
         initRecyclerView()
         logout()
+        updateEmptyTV()
         return viewBinding.root
+    }
+
+    private fun updateEmptyTV() {
+        if(contests.isEmpty())
+            viewBinding.tvNone.visibility=View.VISIBLE
+        else
+            viewBinding.tvNone.visibility=View.GONE
     }
 
     private fun logout() {
@@ -104,6 +112,7 @@ class MyPageFragment : Fragment() {
                             val contestData = ContestData(title, url, support, dDay, read_cnt, clipped)
 
                             contests.add(contestData)
+                            updateEmptyTV()
                         }
                     }
                 }
@@ -127,7 +136,6 @@ class MyPageFragment : Fragment() {
                 }
                 viewBinding.recyclerviewBookmark.adapter = adapter
             }
-
     }
 
 }

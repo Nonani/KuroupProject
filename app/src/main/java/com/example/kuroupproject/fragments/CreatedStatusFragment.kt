@@ -35,11 +35,23 @@ class CreatedStatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStatusCreatedBinding.inflate(layoutInflater)
-
         init()
         return binding.root
     }
+
+    private fun updateEmptyTV() {
+        if(data1.isEmpty())
+            binding.tvNone1.visibility=View.VISIBLE
+        else
+            binding.tvNone1.visibility=View.GONE
+        if(data2.isEmpty())
+            binding.tvNone2.visibility=View.VISIBLE
+        else
+            binding.tvNone2.visibility=View.GONE
+    }
     private fun initRecyclerView() {
+        updateEmptyTV()
+
         binding.contestList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.contestList2.layoutManager =
