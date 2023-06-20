@@ -9,11 +9,15 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.init
 import com.example.kuroupproject.datas.ContestData
 import com.example.kuroupproject.datas.ContestDetailData
 import com.example.kuroupproject.databinding.ActivityDetailBinding
+import com.example.kuroupproject.fragments.ApiService
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,31 +40,81 @@ interface ApiService1 {
 class DetailActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityDetailBinding
     var data: ContestData? = null
+    var contest_title: String? = null
     private lateinit var checkTeamActivityResultLauncher: ActivityResultLauncher<Intent>
-
+    lateinit var userId: String
+    lateinit var auth: FirebaseAuth
+    lateinit var currentUser: FirebaseUser
+    var contests: ArrayList<ContestData> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
+        contest_title = intent.getStringExtra("contest_title")
 
-        @Suppress("DEPRECATION")
-        data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            intent.getSerializableExtra("contestData", ContestData::class.java)!!
-        else
-            intent.getSerializableExtra("contestData") as ContestData?
+        if (contest_title != null) {
+            bringData(contest_title!!) { loadedData ->
+                init(loadedData)
+            }
+        } else {
+            @Suppress("DEPRECATION")
+            data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                intent.getSerializableExtra("contestData", ContestData::class.java)!!
+            else
+                intent.getSerializableExtra("contestData") as ContestData?
+        }
 
         setContentView(viewBinding.root)
         if (data != null) {
             init(data!!)
         } else {
-            Toast.makeText(this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                // 데이터를 다시 로드합니다.
-                init(data!!)
+        checkTeamActivityResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    // 데이터를 다시 로드합니다.
+                    init(data!!)
+                }
+            }
+    }
+
+    private fun bringData(title: String, onDataLoaded: (ContestData) -> Unit) {
+        auth = FirebaseAuth.getInstance()
+        currentUser = auth.currentUser!!
+        userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
+        val httpClient = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }).build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://us-central1-kuroup-project.cloudfunctions.net/app/contest/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(httpClient)
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+
+        lifecycleScope.launch {
+            val requestBody = RequestBody.create(
+                MediaType.parse("application/json"),
+                "{\"uid\": \"$userId\"}"
+            )
+
+            try {
+                contests = apiService.getContests(requestBody)
+                for (contest in contests) {
+                    if (contest.title == title) {
+                        data = contest
+                        onDataLoaded(data!!)
+                        break
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // 에러 처리 필요한 경우 추가
             }
         }
     }
@@ -68,7 +122,7 @@ class DetailActivity : AppCompatActivity() {
     private fun init(contestData: ContestData) {
         viewBinding.createTeamButton.setOnClickListener {
             val intent = Intent(this, CheckTeamActivity::class.java)
-            intent.putExtra("contestTitle",data!!.title)
+            intent.putExtra("contestTitle", data!!.title)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             checkTeamActivityResultLauncher.launch(intent)
         }

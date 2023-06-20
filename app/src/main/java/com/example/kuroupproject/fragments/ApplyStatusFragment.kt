@@ -1,5 +1,6 @@
 package com.example.kuroupproject.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.kuroupproject.activitys.DetailActivity
 import com.example.kuroupproject.adapters.ApplyTeamDataAdapter
 import com.example.kuroupproject.adapters.AcceptedTeamDataAdapter
 import com.example.kuroupproject.datas.TeamData
@@ -45,7 +47,9 @@ class ApplyStatusFragment : Fragment() {
 
         adapter1.itemClickListener1 = object: ApplyTeamDataAdapter.OnItemClickListener{
             override fun OnItemClick(data: TeamData) {
-
+                val intent = Intent(requireActivity(), DetailActivity::class.java)
+                intent.putExtra("contest_title", data.contest_title)
+                startActivity(intent)
             }
         }
         binding.contestList.adapter = adapter1
@@ -56,7 +60,9 @@ class ApplyStatusFragment : Fragment() {
 
         adapter2.itemClickListener1 = object: AcceptedTeamDataAdapter.OnItemClickListener{
             override fun OnItemClick(data: TeamData) {
-
+                val intent = Intent(requireActivity(), DetailActivity::class.java)
+                intent.putExtra("contest_title", data.contest_title)
+                startActivity(intent)
             }
         }
         binding.contestList2.adapter = adapter2
