@@ -34,6 +34,7 @@ class CheckTeamActivity : AppCompatActivity() {
         init()
         checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
+                teams.clear()
                 // 데이터를 다시 로드합니다.
                 init_data()
                 init()
