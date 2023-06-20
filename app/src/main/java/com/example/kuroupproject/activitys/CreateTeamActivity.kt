@@ -91,7 +91,7 @@ class CreateTeamActivity : AppCompatActivity() {
 
             insertData()
             setResult(Activity.RESULT_OK)
-            Toast.makeText(this, "팀이 생성되었습ㅛ다.", Toast.LENGTH_SHORT)
+            Toast.makeText(this, "팀이 생성되었습니다.", Toast.LENGTH_SHORT)
             finish()
         }
         viewBinding.backCreate.setOnClickListener{
