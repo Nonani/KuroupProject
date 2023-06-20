@@ -14,6 +14,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             >
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,12 +25,26 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/contest_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1" />
+            <TextView
+                android:id="@+id/tv_none1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
+                android:text="아직 지원한 팀이 없습니다!"
+                android:textAlignment="center"
+                android:background="@drawable/mypage_myinfo_box"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/contest_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -48,6 +63,20 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_none2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
+                android:text="아직 매칭된 팀이 없습니다!"
+                android:textAlignment="center"
+                android:background="@drawable/mypage_myinfo_box"
+                />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/contest_list2"
