@@ -51,6 +51,26 @@
         android:hint="모집제목을 입력하세요."
         android:padding="10dp" />
 
+        <TextView
+            style="@style/labelStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="팀 소개" />
+
+        <EditText
+            android:id="@+id/content"
+            style="@style/hintStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:hint="팀을 소개해주세요."
+            android:padding="10dp" />
+
     <TextView
         style="@style/labelStyle"
         android:layout_width="wrap_content"
