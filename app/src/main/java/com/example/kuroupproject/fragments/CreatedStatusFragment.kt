@@ -1,5 +1,6 @@
 package com.example.kuroupproject.fragments
 
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -26,6 +28,7 @@ import org.json.JSONObject
 
 class CreatedStatusFragment : Fragment() {
     private lateinit var binding : FragmentStatusCreatedBinding
+    private lateinit var progressBar: ProgressBar
     lateinit var data1: ArrayList<UserData>
     lateinit var data2: ArrayList<UserData>
     lateinit var adapter1: ApplyUserDataAdapter
@@ -147,7 +150,7 @@ class CreatedStatusFragment : Fragment() {
         var auth = Firebase.auth
         val url = "https://us-central1-kuroup-project.cloudfunctions.net/app/team/created"
         val uid = auth.currentUser!!.uid
-
+        progressBar = binding.progressBar
         makePostRequest(url, uid,
             onSuccess = { response ->
                 // Handle the successful response here
@@ -165,6 +168,7 @@ class CreatedStatusFragment : Fragment() {
                 data1 = ArrayList<UserData>(list1)
                 data2 = ArrayList<UserData>(list2)
                 initRecyclerView()
+                progressBar.visibility = View.GONE
 
             },
             onError = { errorMessage ->
