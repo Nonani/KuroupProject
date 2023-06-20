@@ -72,7 +72,6 @@ class DetailActivity : AppCompatActivity() {
             init(data!!)
         } else {
 //            Toast.makeText(this, "데이터를 불러오지 못했습니다.", Toast.LENGTH_SHORT).show()
-            progressBar.visibility = View.GONE
         }
         setContentView(viewBinding.root)
 
