@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -29,6 +30,7 @@ class ApplyStatusFragment : Fragment() {
     private lateinit var binding : FragmentStatusApplyBinding
     lateinit var data1: ArrayList<TeamData>
     lateinit var data2: ArrayList<TeamData>
+    private lateinit var progressBar: ProgressBar
     lateinit var adapter1: ApplyTeamDataAdapter
     lateinit var adapter2: AcceptedTeamDataAdapter
     override fun onCreateView(
@@ -113,7 +115,7 @@ class ApplyStatusFragment : Fragment() {
         var auth = Firebase.auth
         val url = "https://us-central1-kuroup-project.cloudfunctions.net/app/team/supporting"
         val uid = auth.currentUser!!.uid
-
+        progressBar = binding.progressBar
         makePostRequest(url, uid,
             onSuccess = { response ->
                 // Handle the successful response here
@@ -131,7 +133,7 @@ class ApplyStatusFragment : Fragment() {
                 data1 = ArrayList<TeamData>(list1)
                 data2 = ArrayList<TeamData>(list2)
                 initRecyclerView()
-
+                progressBar.visibility = View.GONE
             },
             onError = { errorMessage ->
                 // Handle the error case here
