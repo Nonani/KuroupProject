@@ -29,6 +29,7 @@ class CheckTeamActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
         val intent= intent
         title = intent.getStringExtra("contestTitle")!!
+        updateEmptyTV()
         init_data()
         init()
         checkTeamActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -39,7 +40,13 @@ class CheckTeamActivity : AppCompatActivity() {
             }
         }
     }
+    private fun updateEmptyTV() {
+        if(teams.isEmpty())
+            viewBinding.tvNone1.visibility=View.VISIBLE
+        else
+            viewBinding.tvNone1.visibility=View.GONE
 
+    }
     private fun init() {
         viewBinding.teamList.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
