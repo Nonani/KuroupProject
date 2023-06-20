@@ -1,6 +1,7 @@
 package com.example.kuroupproject.fragments
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -42,11 +43,11 @@ class HomeFragment : Fragment() {
 
     lateinit var contests_adapter: ContestAdapter
     var isClickedBoom: Boolean = false
-    var isClickedLate: Boolean = false
     lateinit var userId: String
     lateinit var auth: FirebaseAuth
     lateinit var currentUser: FirebaseUser
     private lateinit var progressBar: ProgressBar
+    private lateinit var originalContests: ArrayList<ContestData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,13 +60,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBar = viewBinding.progressBar
+        viewBinding.init.paint.isUnderlineText = true
+        viewBinding.init.setTypeface(null, Typeface.BOLD)
         if (!::contests_adapter.isInitialized) {
             init_data()
         } else {
             setupRecyclerView()
         }
     }
-
 
 
     private fun setupRecyclerView() {
@@ -90,16 +92,31 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+        viewBinding.init.setOnClickListener {
+            isClickedBoom = false
+            viewBinding.init.paint.isUnderlineText = true  // 기본순에 밑줄 추가
+            viewBinding.boomOrder.paint.isUnderlineText = false
+            viewBinding.init.setTypeface(null, Typeface.BOLD)
+            viewBinding.boomOrder.setTypeface(null, Typeface.NORMAL)
+
+            contests = originalContests.clone() as ArrayList<ContestData>
+            contests_adapter.setItems(contests)
+            viewBinding.contestList.adapter?.notifyDataSetChanged()
+        }
+
         viewBinding.boomOrder.setOnClickListener {
-            isClickedBoom = !isClickedBoom
-            if (isClickedBoom)
-                contests.sortBy {
-                    it.d_day.split("-").lastOrNull()?.toIntOrNull() ?: it.d_day.split("+").lastOrNull()?.toIntOrNull()?.let { it + 100 }
-                }
-            else
-                contests.sortByDescending {
-                    it.d_day.split("-").lastOrNull()?.toIntOrNull() ?: it.d_day.split("+").lastOrNull()?.toIntOrNull()?.let { it + 100 }
-                }
+            isClickedBoom = true
+            viewBinding.init.paint.isUnderlineText = false
+            viewBinding.boomOrder.paint.isUnderlineText = true
+            viewBinding.init.setTypeface(null, Typeface.NORMAL)
+            viewBinding.boomOrder.setTypeface(null, Typeface.BOLD)
+            contests.sortBy {
+                it.d_day.split("-").lastOrNull()?.toIntOrNull() ?: it.d_day.split("+").lastOrNull()
+                    ?.toIntOrNull()?.let { it + 100 }
+            }
+
+
             viewBinding.contestList.adapter?.notifyDataSetChanged()
         }
 
@@ -132,6 +149,7 @@ class HomeFragment : Fragment() {
 
             try {
                 contests = apiService.getContests(requestBody)
+                originalContests = contests.clone() as ArrayList<ContestData>
                 progressBar.visibility = View.GONE
                 setupRecyclerView()
             } catch (e: Exception) {

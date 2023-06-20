@@ -114,7 +114,6 @@ class DetailActivity : AppCompatActivity() {
                     if (contest.title == title) {
                         data = contest
                         onDataLoaded(data!!)
-                        viewBinding.progressBar.visibility = View.GONE
                         break
                     }
                 }
@@ -206,6 +205,7 @@ class DetailActivity : AppCompatActivity() {
 
         if (detailData != null) {
             // 데이터를 TextView에 추가
+            viewBinding.progressBar.visibility = View.GONE
             Glide.with(this).load(detailData.imgUrl).into(viewBinding.contestImg)
             viewBinding.field1.text = detailData.field
             viewBinding.target1.text = detailData.targetAudience

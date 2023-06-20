@@ -33,7 +33,12 @@
             android:gravity="right"
             android:orientation="horizontal"
             android:paddingBottom="14dp">
-
+            <TextView
+                android:id="@+id/init"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="기본순" />
             <TextView
                 android:id="@+id/boom_order"
                 android:layout_width="wrap_content"

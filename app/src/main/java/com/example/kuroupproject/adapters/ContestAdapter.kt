@@ -20,8 +20,12 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class ContestAdapter(val items: ArrayList<ContestData>) :
+class ContestAdapter(private var items: ArrayList<ContestData>) :
     RecyclerView.Adapter<ContestAdapter.ViewHolder>() {
+
+    fun setItems(newItems: ArrayList<ContestData>) {
+        this.items = newItems
+    }
 
     interface OnItemClickListener {
         fun OnItemClick(holder: ViewHolder, view: View, data: ContestData, position: Int)
