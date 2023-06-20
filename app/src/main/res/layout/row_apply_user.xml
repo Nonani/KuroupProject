@@ -8,6 +8,8 @@
     android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp"
     android:orientation="vertical"
+    android:background="@drawable/mypage_myinfo_box"
+    android:padding="10dp"
     >
 
     <TextView
