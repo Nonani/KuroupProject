@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.activitys.DetailActivity
 import com.example.kuroupproject.activitys.MainActivity
@@ -26,6 +27,7 @@ class MyPageFragment : Fragment() {
     lateinit var adapter: ContestAdapter
     lateinit var firestore: FirebaseFirestore
     lateinit var userId: String
+    private lateinit var progressBar: ProgressBar
     lateinit var auth: FirebaseAuth
     lateinit var currentUser: FirebaseUser
 
@@ -33,11 +35,14 @@ class MyPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         viewBinding = FragmentMyPageBinding.inflate(layoutInflater)
+
         initMyData()
         initRecyclerView()
         logout()
         updateEmptyTV()
+
         return viewBinding.root
     }
 
@@ -60,6 +65,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initMyData() {
+        progressBar = viewBinding.progressBar
         auth = FirebaseAuth.getInstance()
         currentUser = auth.currentUser!!
         userId = currentUser?.uid!! // 사용자의 고유 식별자를 입력
@@ -135,6 +141,7 @@ class MyPageFragment : Fragment() {
                     }
                 }
                 viewBinding.recyclerviewBookmark.adapter = adapter
+                progressBar.visibility = View.GONE
             }
     }
 
