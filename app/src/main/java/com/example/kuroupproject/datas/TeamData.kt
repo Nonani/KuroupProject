@@ -7,5 +7,4 @@ data class TeamData(val detail_url:String,
                     val leader_uid:String,
                     val title:String,
                     val members_info:MutableList<Map<String, String>>
-) {
-}
+)
