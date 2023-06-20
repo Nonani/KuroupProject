@@ -31,7 +31,7 @@
         android:textSize="12dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="12dp"
-        android:maxLines="2"
+        android:maxLines="1"
         android:ellipsize="end"
         app:layout_constraintTop_toBottomOf="@id/mention"
         app:layout_constraintStart_toStartOf="parent"
