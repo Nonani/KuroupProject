@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,8 @@ class CheckTeamActivity : AppCompatActivity() {
     lateinit var title : String
     lateinit var adapter: TeamAdapter
     private lateinit var checkTeamActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityCheckTeamBinding.inflate(layoutInflater)
@@ -75,7 +79,7 @@ class CheckTeamActivity : AppCompatActivity() {
                         val memberState = (memberInfo as Map<String, String>).get("state") as String
                         memberState == "accepted"
                     }.size
-
+                    viewBinding.progressBar.visibility = View.GONE
                     teams.add(TeamCheckData(documentId!!, title!!,content!!,membersInfoSize,teamMaxNumber!!))
                 }
                 teams_adapter.notifyDataSetChanged()
