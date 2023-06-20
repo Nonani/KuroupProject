@@ -44,10 +44,10 @@
         android:text="모집현황: 2 / 5"
         android:textColor="@color/mypage_semibrown"
         android:textSize="12dp"
-        app:layout_constraintStart_toEndOf="@id/place"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/place"
         app:layout_constraintBottom_toBottomOf="@id/place"
-        android:layout_marginStart="6dp"
+        android:layout_marginEnd="12dp"
 
         />
 
@@ -56,7 +56,7 @@
         android:id="@+id/supply"
         android:layout_width="wrap_content"
         android:layout_height="14dp"
-        android:layout_marginStart="6dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/dday_button"
         android:minWidth="0dp"
         android:paddingStart="10dp"
@@ -65,7 +65,7 @@
         android:textColor="@color/white"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="@id/mention"
-        app:layout_constraintStart_toEndOf="@id/mention"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/mention" />
 
     <View
