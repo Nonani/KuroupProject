@@ -33,8 +33,6 @@ class ContestAdapter(val items: ArrayList<ContestData>) :
     lateinit var auth: FirebaseAuth
     lateinit var firestore: FirebaseFirestore
 
-
-
     inner class ViewHolder(val viewBinding: RowContestBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
@@ -42,7 +40,6 @@ class ContestAdapter(val items: ArrayList<ContestData>) :
             viewBinding.contestTitle.text = data.title
             viewBinding.contestSupport.text = data.sub_title
             viewBinding.dday.text = data.d_day
-
 
 
             if (data.clipped)

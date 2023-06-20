@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kuroupproject.activitys.DetailActivity
+import com.example.kuroupproject.activitys.MainActivity
 import com.example.kuroupproject.adapters.ContestAdapter
 import com.example.kuroupproject.databinding.FragmentMyPageBinding
 import com.example.kuroupproject.datas.ContestData
@@ -35,7 +36,19 @@ class MyPageFragment : Fragment() {
         viewBinding = FragmentMyPageBinding.inflate(layoutInflater)
         initMyData()
         initRecyclerView()
+        logout()
         return viewBinding.root
+    }
+
+    private fun logout() {
+        viewBinding.logoutButton.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+
+            val intent=Intent(requireContext(),MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK )
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 
     private fun initMyData() {
